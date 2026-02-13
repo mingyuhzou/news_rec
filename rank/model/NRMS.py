@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from model.TextEncoder import TextEncoder,AdditiveAttention
+from rank.model.TextEncoder import TextEncoder,AdditiveAttention
 import torch.nn.functional as F
 
 class NRMS(nn.Module):

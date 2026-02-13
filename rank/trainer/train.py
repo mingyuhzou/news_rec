@@ -1,13 +1,15 @@
 import torch
 import torch.nn as nn
-import torch.optim as optim
-from config import hparams
-from model.NRMS import NRMS
+from config.model.nrms import hparams
+from rank.model.NRMS import NRMS
 import pytorch_optimizer as optim_
-from dataset import trainDataset
+from rank.data.dataset import trainDataset
 from torch.utils.data import DataLoader
 import pickle
 from tqdm import tqdm
+from rank.utils.processData import processW2vec
+
+processW2vec(hparams['news_file'], hparams['vocab_file'], hparams['w2v_file'])
 
 device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 news_file=hparams['news_file']

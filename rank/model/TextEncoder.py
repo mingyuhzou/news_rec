@@ -2,6 +2,8 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 from typing import Tuple,Optional
+
+
 class AdditiveAttention(nn.Module):
     # 加性注意力池化，将N个词向量聚合为一个代表整个文章的向量
     def __init__(self,in_dim,v_size):

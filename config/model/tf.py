@@ -31,7 +31,7 @@ cfg={
     'mode': 'train',  # 运行模式: 'train' 或 'evaluation'
 
     # 生成与评估
-    'topk_list': [5, 10, 20, 100],  # 评估指标的 K 值列表 (Recall@K, NDCG@K)
+    'topk_list': [5, 10, 20, 30],  # 评估指标的 K 值列表 (Recall@K, NDCG@K)
     'beam_size': 30,  # 束搜索 (Beam Search) 的大小
 
     # 文件保存与日志

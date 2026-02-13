@@ -1,4 +1,5 @@
 from os.path import join
+import os
 
 data_path='/home/ming/news_rec/Data'
 cfg={
@@ -10,4 +11,5 @@ cfg={
     "embed_path":join(data_path,'embedding'),
     "user_dict":join(data_path,'user_dict.npy'),
     "item_dict":join(data_path,'item_dict.npy'),
+    'news_file':os.path.join(data_path,'news.parquet'),
 }

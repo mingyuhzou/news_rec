@@ -7,7 +7,7 @@ import polars as pl
 import pickle
 import random
 import re
-from processData import processNews
+from rank.utils.processData import processNews
 # %%
 class trainDataset(Dataset):
     def __init__(self,news_file,behaviors_file,w2v_file,max_len,max_hist_len,neg_num):
@@ -58,7 +58,7 @@ class trainDataset(Dataset):
         cand_nids=[target_pos]+target_negs
         # 转换
         cand_docs = [self.news_dict.get(nid, self.news_dict['<PAD>']) for nid in cand_nids]
-        
+
         label=0
         return (
             torch.LongTensor(click_docs), # [max_hist_len,max_len] 
