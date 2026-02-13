@@ -1,0 +1,256 @@
+2026-02-12 17:38:22,781 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 17:38:22,807 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 17:39:00,066 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 17:39:00,091 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 17:40:16,680 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 200, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 17:40:16,706 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 17:46:45,676 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 200, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 17:46:45,701 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 17:46:53,957 - INFO - Epoch 1/200
+2026-02-12 17:49:07,775 - INFO - Training loss: 0.005574531744195395
+2026-02-12 17:49:35,480 - INFO - Validation Dataset: {'Recall@5': 0.0, 'Recall@10': 0.0, 'Recall@20': 0.0, 'Recall@100': 0.0}
+2026-02-12 17:49:35,480 - INFO - Validation Dataset: {'NDCG@5': 0.0, 'NDCG@10': 0.0, 'NDCG@20': 0.0, 'NDCG@100': 0.0}
+2026-02-12 17:49:35,480 - INFO - No improvement in NDCG@20. Early stop counter: 1
+2026-02-12 17:49:35,481 - INFO - Epoch 2/200
+2026-02-12 17:49:57,869 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 17:49:57,895 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 17:56:37,819 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 17:56:37,844 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 17:56:46,085 - INFO - Epoch 1/20
+2026-02-12 17:58:54,082 - INFO - Training loss: 0.02873322417953474
+2026-02-12 17:59:21,142 - INFO - Validation Dataset: {'Recall@5': 0.0, 'Recall@10': 0.0, 'Recall@20': 0.0, 'Recall@100': 0.0}
+2026-02-12 17:59:21,142 - INFO - Validation Dataset: {'NDCG@5': 0.0, 'NDCG@10': 0.0, 'NDCG@20': 0.0, 'NDCG@100': 0.0}
+2026-02-12 17:59:21,142 - INFO - No improvement in NDCG@20. Early stop counter: 1
+2026-02-12 17:59:21,142 - INFO - Epoch 2/20
+2026-02-12 18:01:26,888 - INFO - Training loss: 0.0016780443534707733
+2026-02-12 18:01:53,583 - INFO - Validation Dataset: {'Recall@5': 0.0, 'Recall@10': 0.0, 'Recall@20': 0.0, 'Recall@100': 0.0}
+2026-02-12 18:01:53,583 - INFO - Validation Dataset: {'NDCG@5': 0.0, 'NDCG@10': 0.0, 'NDCG@20': 0.0, 'NDCG@100': 0.0}
+2026-02-12 18:01:53,583 - INFO - No improvement in NDCG@20. Early stop counter: 2
+2026-02-12 18:01:53,583 - INFO - Epoch 3/20
+2026-02-12 18:33:48,692 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 18:33:48,718 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 18:33:56,878 - INFO - Epoch 1/20
+2026-02-12 18:36:02,565 - INFO - Training loss: 0.013363359620910498
+2026-02-12 18:36:29,339 - INFO - Validation Dataset: {'Recall@5': 0.0, 'Recall@10': 0.0, 'Recall@20': 0.0, 'Recall@100': 0.0}
+2026-02-12 18:36:29,339 - INFO - Validation Dataset: {'NDCG@5': 0.0, 'NDCG@10': 0.0, 'NDCG@20': 0.0, 'NDCG@100': 0.0}
+2026-02-12 18:36:29,339 - INFO - No improvement in NDCG@20. Early stop counter: 1
+2026-02-12 18:36:29,339 - INFO - Epoch 2/20
+2026-02-12 18:51:00,529 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 18:51:00,555 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 18:51:08,652 - INFO - Epoch 1/20
+2026-02-12 18:53:11,487 - INFO - Training loss: 0.014317513132123384
+2026-02-12 18:53:51,293 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 18:53:51,318 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 18:53:59,459 - INFO - Epoch 1/20
+2026-02-12 18:56:02,307 - INFO - Training loss: 0.015432200694773742
+2026-02-12 18:56:30,071 - INFO - Validation Dataset: {'Recall@5': 0.0, 'Recall@10': 0.0, 'Recall@20': 0.0, 'Recall@100': 0.0}
+2026-02-12 18:56:30,071 - INFO - Validation Dataset: {'NDCG@5': 0.0, 'NDCG@10': 0.0, 'NDCG@20': 0.0, 'NDCG@100': 0.0}
+2026-02-12 18:56:30,071 - INFO - No improvement in NDCG@20. Early stop counter: 1
+2026-02-12 18:56:30,071 - INFO - Epoch 2/20
+2026-02-12 19:07:29,619 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 19:07:29,654 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 19:07:38,453 - INFO - Epoch 1/20
+2026-02-12 19:57:15,556 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt'}
+2026-02-12 19:57:15,582 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 19:57:23,780 - INFO - Epoch 1/20
+2026-02-12 19:59:25,949 - INFO - Training loss: 4.046049923046131
+2026-02-12 20:00:12,531 - INFO - Validation Dataset: {'Recall@5': 0.023442847675259476, 'Recall@10': 0.03194830312491136, 'Recall@20': 0.04944488050672369, 'Recall@100': 0.06644195137312157}
+2026-02-12 20:00:12,532 - INFO - Validation Dataset: {'NDCG@5': 0.015055255292201496, 'NDCG@10': 0.01770751927099602, 'NDCG@20': 0.021976698757468643, 'NDCG@100': 0.02555102450501564}
+2026-02-12 20:01:12,056 - INFO - Best NDCG@20: 0.021976698757468643
+2026-02-12 20:01:12,056 - INFO - Test Dataset: {'Recall@5': 0.01772431283233041, 'Recall@10': 0.021724141724943136, 'Recall@20': 0.034108638589402364, 'Recall@100': 0.04774756413488601}
+2026-02-12 20:01:12,056 - INFO - Test Dataset: {'NDCG@5': 0.010835378224248148, 'NDCG@10': 0.012068423483180345, 'NDCG@20': 0.015074715536045679, 'NDCG@100': 0.0179331341803311}
+2026-02-12 20:04:25,397 - INFO - Configuration: {'batch_size': 256, 'infer_size': 96, 'num_epochs': 20, 'lr': 0.0001, 'device': 'cuda', 'seed': 2025, 'early_stop': 10, 'num_layers': 4, 'num_decoder_layers': 4, 'd_model': 128, 'd_ff': 1024, 'num_heads': 6, 'd_kv': 64, 'dropout_rate': 0.1, 'vocab_size': 1025, 'pad_token_id': 0, 'eos_token_id': 0, 'feed_forward_proj': 'relu', 'max_len': 20, 'dataset_path': '/home/ming/news_rec/Data/train', 'code_path': '/home/ming/news_rec/Data/rqvae.npy', 'mode': 'train', 'topk_list': [5, 10, 20, 100], 'beam_size': 30, 'log_path': '/home/ming/news_rec/log/tiger.log', 'save_path': '/home/ming/news_rec/Data/ckpt/tiger.pth'}
+2026-02-12 20:04:25,422 - INFO - #Embedding parameters: 131200
+#Non-embedding parameters: 4459648
+#Total trainable parameters: 4590848
+
+2026-02-12 20:04:33,557 - INFO - Epoch 1/20
+2026-02-12 20:06:38,080 - INFO - Training loss: 4.073897588155469
+2026-02-12 20:07:21,265 - INFO - Validation Dataset: {'Recall@5': 0.02283639361741484, 'Recall@10': 0.03787318318393808, 'Recall@20': 0.05348748837270653, 'Recall@100': 0.059925715481093655}
+2026-02-12 20:07:21,265 - INFO - Validation Dataset: {'NDCG@5': 0.016301941215510058, 'NDCG@10': 0.021046501161718027, 'NDCG@20': 0.02511899170630231, 'NDCG@100': 0.026482399483259148}
+2026-02-12 20:08:04,321 - INFO - Best NDCG@20: 0.02511899170630231
+2026-02-12 20:08:04,321 - INFO - Test Dataset: {'Recall@5': 0.014544832611980502, 'Recall@10': 0.028790212454354615, 'Recall@20': 0.041038823189707266, 'Recall@100': 0.04407612641496886}
+2026-02-12 20:08:04,321 - INFO - Test Dataset: {'NDCG@5': 0.010700587183237076, 'NDCG@10': 0.015165778062950813, 'NDCG@20': 0.018393273755058923, 'NDCG@100': 0.019031283764543445}
+2026-02-12 20:08:04,333 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:08:04,333 - INFO - Epoch 2/20
+2026-02-12 20:10:10,327 - INFO - Training loss: 3.151220303549509
+2026-02-12 20:10:53,015 - INFO - Validation Dataset: {'Recall@5': 0.021111396640477974, 'Recall@10': 0.03768067811548832, 'Recall@20': 0.06022516797340687, 'Recall@100': 0.07050594857471251}
+2026-02-12 20:10:53,015 - INFO - Validation Dataset: {'NDCG@5': 0.014638462666139098, 'NDCG@10': 0.02006712549239841, 'NDCG@20': 0.02570446098923255, 'NDCG@100': 0.027877004182222442}
+2026-02-12 20:11:35,565 - INFO - Best NDCG@20: 0.02570446098923255
+2026-02-12 20:11:35,565 - INFO - Test Dataset: {'Recall@5': 0.013852820659029532, 'Recall@10': 0.02610898088067158, 'Recall@20': 0.044688871445887755, 'Recall@100': 0.0515762772296366}
+2026-02-12 20:11:35,565 - INFO - Test Dataset: {'NDCG@5': 0.009580849854417098, 'NDCG@10': 0.01359801438878036, 'NDCG@20': 0.01824137651853003, 'NDCG@100': 0.0196897119256903}
+2026-02-12 20:11:35,581 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:11:35,581 - INFO - Epoch 3/20
+2026-02-12 20:13:37,976 - INFO - Training loss: 2.850729249229993
+2026-02-12 20:14:20,473 - INFO - Validation Dataset: {'Recall@5': 0.024234257617418403, 'Recall@10': 0.037966290307164315, 'Recall@20': 0.06001127347946779, 'Recall@100': 0.0757539153588626}
+2026-02-12 20:14:20,473 - INFO - Validation Dataset: {'NDCG@5': 0.015775904108175445, 'NDCG@10': 0.020136746450268053, 'NDCG@20': 0.025671575325053545, 'NDCG@100': 0.029007524165881364}
+2026-02-12 20:14:20,473 - INFO - No improvement in NDCG@20. Early stop counter: 1
+2026-02-12 20:14:20,473 - INFO - Epoch 4/20
+2026-02-12 20:16:22,586 - INFO - Training loss: 2.7004483577272507
+2026-02-12 20:17:05,059 - INFO - Validation Dataset: {'Recall@5': 0.028062970834560462, 'Recall@10': 0.04224418217480733, 'Recall@20': 0.0660292605775766, 'Recall@100': 0.0834604118772815}
+2026-02-12 20:17:05,059 - INFO - Validation Dataset: {'NDCG@5': 0.017617899459811574, 'NDCG@10': 0.022194221856271432, 'NDCG@20': 0.028179098653092642, 'NDCG@100': 0.031882539466578035}
+2026-02-12 20:17:48,645 - INFO - Best NDCG@20: 0.028179098653092642
+2026-02-12 20:17:48,645 - INFO - Test Dataset: {'Recall@5': 0.0197424712271508, 'Recall@10': 0.029916304572881247, 'Recall@20': 0.047134819107791846, 'Recall@100': 0.06041767301317113}
+2026-02-12 20:17:48,645 - INFO - Test Dataset: {'NDCG@5': 0.012442919572918567, 'NDCG@10': 0.015717544428453432, 'NDCG@20': 0.020032123676396035, 'NDCG@100': 0.02284854900443762}
+2026-02-12 20:17:48,661 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:17:48,661 - INFO - Epoch 5/20
+2026-02-12 20:19:55,485 - INFO - Training loss: 2.6028635283343724
+2026-02-12 20:20:40,985 - INFO - Validation Dataset: {'Recall@5': 0.030950547834701483, 'Recall@10': 0.048917693275292794, 'Recall@20': 0.07443531823308194, 'Recall@100': 0.09054158110500483}
+2026-02-12 20:20:40,985 - INFO - Validation Dataset: {'NDCG@5': 0.019977619009975963, 'NDCG@10': 0.025728446525163963, 'NDCG@20': 0.032128794156531255, 'NDCG@100': 0.03555636994638222}
+2026-02-12 20:21:26,500 - INFO - Best NDCG@20: 0.032128794156531255
+2026-02-12 20:21:26,500 - INFO - Test Dataset: {'Recall@5': 0.022544490420154356, 'Recall@10': 0.03606891950680367, 'Recall@20': 0.05358688642311023, 'Recall@100': 0.06639917242269985}
+2026-02-12 20:21:26,500 - INFO - Test Dataset: {'NDCG@5': 0.014629191032455932, 'NDCG@10': 0.018967508739988783, 'NDCG@20': 0.0233735385799333, 'NDCG@100': 0.02609749440509191}
+2026-02-12 20:21:26,516 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:21:26,516 - INFO - Epoch 6/20
+2026-02-12 20:23:33,497 - INFO - Training loss: 2.528008593904211
+2026-02-12 20:24:18,420 - INFO - Validation Dataset: {'Recall@5': 0.03413757720858899, 'Recall@10': 0.05468529806466624, 'Recall@20': 0.08501555142231913, 'Recall@100': 0.10422328608665134}
+2026-02-12 20:24:18,420 - INFO - Validation Dataset: {'NDCG@5': 0.02206378459482926, 'NDCG@10': 0.028689210918431747, 'NDCG@20': 0.036302460532528356, 'NDCG@100': 0.04038431755796809}
+2026-02-12 20:25:01,052 - INFO - Best NDCG@20: 0.036302460532528356
+2026-02-12 20:25:01,052 - INFO - Test Dataset: {'Recall@5': 0.02503950795774526, 'Recall@10': 0.03949878213341965, 'Recall@20': 0.06788259436370656, 'Recall@100': 0.08301123319235792}
+2026-02-12 20:25:01,052 - INFO - Test Dataset: {'NDCG@5': 0.01615913346834343, 'NDCG@10': 0.020831413003396113, 'NDCG@20': 0.027926530154016502, 'NDCG@100': 0.03114157220256922}
+2026-02-12 20:25:01,067 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:25:01,067 - INFO - Epoch 7/20
+2026-02-12 20:27:03,474 - INFO - Training loss: 2.467737031802413
+2026-02-12 20:27:45,983 - INFO - Validation Dataset: {'Recall@5': 0.03649041762296302, 'Recall@10': 0.054885352519962335, 'Recall@20': 0.08600701584272255, 'Recall@100': 0.10671201240064794}
+2026-02-12 20:27:45,983 - INFO - Validation Dataset: {'NDCG@5': 0.023397480121391083, 'NDCG@10': 0.029312321320520352, 'NDCG@20': 0.03714199683311523, 'NDCG@100': 0.04155855236223132}
+2026-02-12 20:28:28,517 - INFO - Best NDCG@20: 0.03714199683311523
+2026-02-12 20:28:28,517 - INFO - Test Dataset: {'Recall@5': 0.02633042459890583, 'Recall@10': 0.039648508389138096, 'Recall@20': 0.065671930877488, 'Recall@100': 0.08292567525900427}
+2026-02-12 20:28:28,517 - INFO - Test Dataset: {'NDCG@5': 0.016751572086229093, 'NDCG@10': 0.021033437059163374, 'NDCG@20': 0.02760262278748152, 'NDCG@100': 0.0312787402890722}
+2026-02-12 20:28:28,532 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:28:28,532 - INFO - Epoch 8/20
+2026-02-12 20:30:33,404 - INFO - Training loss: 2.416380947350285
+2026-02-12 20:31:18,881 - INFO - Validation Dataset: {'Recall@5': 0.03875770024932324, 'Recall@10': 0.05964765252901176, 'Recall@20': 0.08982817975716241, 'Recall@100': 0.10856534641434953}
+2026-02-12 20:31:18,882 - INFO - Validation Dataset: {'NDCG@5': 0.025247694698814493, 'NDCG@10': 0.03196987315191977, 'NDCG@20': 0.03960321111092057, 'NDCG@100': 0.04358860310568671}
+2026-02-12 20:32:04,390 - INFO - Best NDCG@20: 0.03960321111092057
+2026-02-12 20:32:04,390 - INFO - Test Dataset: {'Recall@5': 0.028597707334270958, 'Recall@10': 0.04438312801301051, 'Recall@20': 0.06754036280431726, 'Recall@100': 0.08093016446439943}
+2026-02-12 20:32:04,390 - INFO - Test Dataset: {'NDCG@5': 0.018374755241366933, 'NDCG@10': 0.023453007372826705, 'NDCG@20': 0.029306604663671226, 'NDCG@100': 0.03215570790880576}
+2026-02-12 20:32:04,406 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:32:04,406 - INFO - Epoch 9/20
+2026-02-12 20:34:11,514 - INFO - Training loss: 2.374095742636148
+2026-02-12 20:34:57,060 - INFO - Validation Dataset: {'Recall@5': 0.040190794078721157, 'Recall@10': 0.06140913739915195, 'Recall@20': 0.0973572697169176, 'Recall@100': 0.11951674942837481}
+2026-02-12 20:34:57,060 - INFO - Validation Dataset: {'NDCG@5': 0.025909873471428972, 'NDCG@10': 0.03267929948019189, 'NDCG@20': 0.041746122988220113, 'NDCG@100': 0.04646027706624668}
+2026-02-12 20:35:42,622 - INFO - Best NDCG@20: 0.041746122988220113
+2026-02-12 20:35:42,622 - INFO - Test Dataset: {'Recall@5': 0.029945243264737804, 'Recall@10': 0.045559548334939526, 'Recall@20': 0.07239577025595816, 'Recall@100': 0.09171045214526768}
+2026-02-12 20:35:42,622 - INFO - Test Dataset: {'NDCG@5': 0.019122095964084047, 'NDCG@10': 0.024139370077463668, 'NDCG@20': 0.030930163430574004, 'NDCG@100': 0.035031632877871}
+2026-02-12 20:35:42,638 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:35:42,638 - INFO - Epoch 10/20
+2026-02-12 20:37:50,238 - INFO - Training loss: 2.335277201266999
+2026-02-12 20:38:35,766 - INFO - Validation Dataset: {'Recall@5': 0.03865075300522225, 'Recall@10': 0.06360470255343453, 'Recall@20': 0.10216989795614256, 'Recall@100': 0.12379464146621846}
+2026-02-12 20:38:35,766 - INFO - Validation Dataset: {'NDCG@5': 0.025381636911968736, 'NDCG@10': 0.03340909989776369, 'NDCG@20': 0.04304382053071928, 'NDCG@100': 0.047638404619109335}
+2026-02-12 20:39:21,312 - INFO - Best NDCG@20: 0.04304382053071928
+2026-02-12 20:39:21,312 - INFO - Test Dataset: {'Recall@5': 0.027528234332937603, 'Recall@10': 0.04612951438866357, 'Recall@20': 0.08218459349156222, 'Recall@100': 0.10034424463550902}
+2026-02-12 20:39:21,312 - INFO - Test Dataset: {'NDCG@5': 0.018381099416482315, 'NDCG@10': 0.024372409399526167, 'NDCG@20': 0.03334019150493143, 'NDCG@100': 0.03720783884589249}
+2026-02-12 20:39:21,327 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:39:21,327 - INFO - Epoch 11/20
+2026-02-12 20:41:28,850 - INFO - Training loss: 2.302907735431253
+2026-02-12 20:42:14,376 - INFO - Validation Dataset: {'Recall@5': 0.042693360829133026, 'Recall@10': 0.06734785780853743, 'Recall@20': 0.10492913821784806, 'Recall@100': 0.1263399868897589}
+2026-02-12 20:42:14,376 - INFO - Validation Dataset: {'NDCG@5': 0.027979403999069938, 'NDCG@10': 0.03589414209662889, 'NDCG@20': 0.04530233049380843, 'NDCG@100': 0.04985653596033306}
+2026-02-12 20:42:59,932 - INFO - Best NDCG@20: 0.04530233049380843
+2026-02-12 20:42:59,932 - INFO - Test Dataset: {'Recall@5': 0.03189168391783685, 'Recall@10': 0.04965877513835318, 'Recall@20': 0.08118683807896086, 'Recall@100': 0.09945343646318394}
+2026-02-12 20:42:59,932 - INFO - Test Dataset: {'NDCG@5': 0.02067337576701503, 'NDCG@10': 0.02639492089885002, 'NDCG@20': 0.03425688078403243, 'NDCG@100': 0.03815096212183823}
+2026-02-12 20:42:59,948 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:42:59,948 - INFO - Epoch 12/20
+2026-02-12 20:45:07,667 - INFO - Training loss: 2.2731151624514117
+2026-02-12 20:45:53,173 - INFO - Validation Dataset: {'Recall@5': 0.044875085644531056, 'Recall@10': 0.07012848747469623, 'Recall@20': 0.10915670204081514, 'Recall@100': 0.13364763269526023}
+2026-02-12 20:45:53,173 - INFO - Validation Dataset: {'NDCG@5': 0.029578865762012085, 'NDCG@10': 0.03769437560488449, 'NDCG@20': 0.04749091240258035, 'NDCG@100': 0.052713934209740874}
+2026-02-12 20:46:38,721 - INFO - Best NDCG@20: 0.04749091240258035
+2026-02-12 20:46:38,721 - INFO - Test Dataset: {'Recall@5': 0.03319644095142825, 'Recall@10': 0.05179772119456615, 'Recall@20': 0.08565723532294468, 'Recall@100': 0.10708947376839556}
+2026-02-12 20:46:38,721 - INFO - Test Dataset: {'NDCG@5': 0.021849604320637806, 'NDCG@10': 0.02781246752560414, 'NDCG@20': 0.036255609116935816, 'NDCG@100': 0.04083506776272363}
+2026-02-12 20:46:38,737 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:46:38,737 - INFO - Epoch 13/20
+2026-02-12 20:48:46,011 - INFO - Training loss: 2.247598139627085
+2026-02-12 20:49:31,539 - INFO - Validation Dataset: {'Recall@5': 0.0456161674234473, 'Recall@10': 0.07245993862421973, 'Recall@20': 0.11208705765862607, 'Recall@100': 0.13576518920168004}
+2026-02-12 20:49:31,539 - INFO - Validation Dataset: {'NDCG@5': 0.0303083916502628, 'NDCG@10': 0.03890884749149594, 'NDCG@20': 0.04892542150858369, 'NDCG@100': 0.05396958446661795}
+2026-02-12 20:50:17,085 - INFO - Best NDCG@20: 0.04892542150858369
+2026-02-12 20:50:17,085 - INFO - Test Dataset: {'Recall@5': 0.03503593450959091, 'Recall@10': 0.05670345639446617, 'Recall@20': 0.08972123243465438, 'Recall@100': 0.11029789241095833}
+2026-02-12 20:50:17,085 - INFO - Test Dataset: {'NDCG@5': 0.02336505492594575, 'NDCG@10': 0.030268172903686334, 'NDCG@20': 0.03860861290097083, 'NDCG@100': 0.042997498035591546}
+2026-02-12 20:50:17,101 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:50:17,101 - INFO - Epoch 14/20
+2026-02-12 20:52:24,377 - INFO - Training loss: 2.224258023119987
+2026-02-12 20:53:09,887 - INFO - Validation Dataset: {'Recall@5': 0.046842915897144795, 'Recall@10': 0.077101451302716, 'Recall@20': 0.11591577086620629, 'Recall@100': 0.1384816503255519}
+2026-02-12 20:53:09,887 - INFO - Validation Dataset: {'NDCG@5': 0.03076290208712465, 'NDCG@10': 0.04048859609388488, 'NDCG@20': 0.05026162850806295, 'NDCG@100': 0.055066015798927455}
+2026-02-12 20:53:55,430 - INFO - Best NDCG@20: 0.05026162850806295
+2026-02-12 20:53:55,430 - INFO - Test Dataset: {'Recall@5': 0.036190965264515464, 'Recall@10': 0.06283468197939393, 'Recall@20': 0.09257987098772179, 'Recall@100': 0.11022617515689048}
+2026-02-12 20:53:55,430 - INFO - Test Dataset: {'NDCG@5': 0.023414887533785136, 'NDCG@10': 0.031978826753286456, 'NDCG@20': 0.03945635102337391, 'NDCG@100': 0.04321023466130546}
+2026-02-12 20:53:55,446 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:53:55,446 - INFO - Epoch 15/20
+2026-02-12 20:56:02,942 - INFO - Training loss: 2.2036704193745815
+2026-02-12 20:56:48,467 - INFO - Validation Dataset: {'Recall@5': 0.048225681427521996, 'Recall@10': 0.0792970164627357, 'Recall@20': 0.12064284160427244, 'Recall@100': 0.14390702402597824}
+2026-02-12 20:56:48,467 - INFO - Validation Dataset: {'NDCG@5': 0.031731938346608465, 'NDCG@10': 0.04169036661326365, 'NDCG@20': 0.05217382924734506, 'NDCG@100': 0.057126829452292506}
+2026-02-12 20:57:34,011 - INFO - Best NDCG@20: 0.05217382924734506
+2026-02-12 20:57:34,011 - INFO - Test Dataset: {'Recall@5': 0.037538501170121544, 'Recall@10': 0.0655083642943592, 'Recall@20': 0.0993892680815358, 'Recall@100': 0.11923113739160052}
+2026-02-12 20:57:34,011 - INFO - Test Dataset: {'NDCG@5': 0.025015044081535428, 'NDCG@10': 0.0339735978965703, 'NDCG@20': 0.042543203743974044, 'NDCG@100': 0.046773431063448015}
+2026-02-12 20:57:34,026 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 20:57:34,026 - INFO - Epoch 16/20
+2026-02-12 20:59:41,164 - INFO - Training loss: 2.1855378243029606
+2026-02-12 21:00:26,694 - INFO - Validation Dataset: {'Recall@5': 0.050778576243645845, 'Recall@10': 0.08229154070697771, 'Recall@20': 0.12192620915691588, 'Recall@100': 0.14457009756436584}
+2026-02-12 21:00:26,694 - INFO - Validation Dataset: {'NDCG@5': 0.03378211436563724, 'NDCG@10': 0.043869620298553694, 'NDCG@20': 0.05388455411411623, 'NDCG@100': 0.05870733497706405}
+2026-02-12 21:01:10,641 - INFO - Best NDCG@20: 0.05388455411411623
+2026-02-12 21:01:10,641 - INFO - Test Dataset: {'Recall@5': 0.041324435383295624, 'Recall@10': 0.06923013030373523, 'Recall@20': 0.1038735054157965, 'Recall@100': 0.12216149339762189}
+2026-02-12 21:01:10,641 - INFO - Test Dataset: {'NDCG@5': 0.028069918035305806, 'NDCG@10': 0.037014757539289074, 'NDCG@20': 0.0457798683092197, 'NDCG@100': 0.04967149183559528}
+2026-02-12 21:01:10,657 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 21:01:10,657 - INFO - Epoch 17/20
+2026-02-12 21:03:17,888 - INFO - Training loss: 2.1687493302428003
+2026-02-12 21:04:00,649 - INFO - Validation Dataset: {'Recall@5': 0.05222551024555242, 'Recall@10': 0.08742501088504123, 'Recall@20': 0.1295119182606375, 'Recall@100': 0.15393868015287349}
+2026-02-12 21:04:00,650 - INFO - Validation Dataset: {'NDCG@5': 0.0338221377486581, 'NDCG@10': 0.04508796147906529, 'NDCG@20': 0.055735943041497066, 'NDCG@100': 0.060944825181358894}
+2026-02-12 21:04:43,163 - INFO - Best NDCG@20: 0.055735943041497066
+2026-02-12 21:04:43,163 - INFO - Test Dataset: {'Recall@5': 0.04234358026919546, 'Recall@10': 0.07526195784782115, 'Recall@20': 0.11147431293368584, 'Recall@100': 0.1295270164873933}
+2026-02-12 21:04:43,163 - INFO - Test Dataset: {'NDCG@5': 0.027061505235532714, 'NDCG@10': 0.03757867094337772, 'NDCG@20': 0.046764348254938755, 'NDCG@100': 0.050618320462548265}
+2026-02-12 21:04:43,179 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 21:04:43,179 - INFO - Epoch 18/20
+2026-02-12 21:06:45,423 - INFO - Training loss: 2.1524308884787677
+2026-02-12 21:07:27,908 - INFO - Validation Dataset: {'Recall@5': 0.0526180697616488, 'Recall@10': 0.086384476588951, 'Recall@20': 0.1286852781792808, 'Recall@100': 0.15594928931957397}
+2026-02-12 21:07:27,908 - INFO - Validation Dataset: {'NDCG@5': 0.034800361397291785, 'NDCG@10': 0.04562680865351103, 'NDCG@20': 0.05632661184529321, 'NDCG@100': 0.06212798688461281}
+2026-02-12 21:08:10,416 - INFO - Best NDCG@20: 0.05632661184529321
+2026-02-12 21:08:10,416 - INFO - Test Dataset: {'Recall@5': 0.04439696825627674, 'Recall@10': 0.07539029454035986, 'Recall@20': 0.11168820735686735, 'Recall@100': 0.13427547612504792}
+2026-02-12 21:08:10,416 - INFO - Test Dataset: {'NDCG@5': 0.028909225303687353, 'NDCG@10': 0.038834318231783606, 'NDCG@20': 0.04806693538820688, 'NDCG@100': 0.052882731205628884}
+2026-02-12 21:08:10,433 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 21:08:10,433 - INFO - Epoch 19/20
+2026-02-12 21:10:16,359 - INFO - Training loss: 2.1385414899663724
+2026-02-12 21:11:01,888 - INFO - Validation Dataset: {'Recall@5': 0.05445001393487749, 'Recall@10': 0.08919278697877571, 'Recall@20': 0.13443149366173165, 'Recall@100': 0.1603127393710907}
+2026-02-12 21:11:01,888 - INFO - Validation Dataset: {'NDCG@5': 0.03548771132728433, 'NDCG@10': 0.04663577576997849, 'NDCG@20': 0.058051711059265314, 'NDCG@100': 0.06356851506052688}
+2026-02-12 21:11:47,437 - INFO - Best NDCG@20: 0.058051711059265314
+2026-02-12 21:11:47,437 - INFO - Test Dataset: {'Recall@5': 0.04520976758376529, 'Recall@10': 0.07844898732497646, 'Recall@20': 0.11553831003774608, 'Recall@100': 0.13798969301722133}
+2026-02-12 21:11:47,437 - INFO - Test Dataset: {'NDCG@5': 0.02913985506954624, 'NDCG@10': 0.03979167966764933, 'NDCG@20': 0.049214270459277676, 'NDCG@100': 0.05400527840828259}
+2026-02-12 21:11:47,452 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
+2026-02-12 21:11:47,452 - INFO - Epoch 20/20
+2026-02-12 21:13:54,870 - INFO - Training loss: 2.1254772679505294
+2026-02-12 21:14:40,384 - INFO - Validation Dataset: {'Recall@5': 0.055633983469627474, 'Recall@10': 0.09311460721587621, 'Recall@20': 0.13895221862337673, 'Recall@100': 0.16508258866945577}
+2026-02-12 21:14:40,384 - INFO - Validation Dataset: {'NDCG@5': 0.036199276021909296, 'NDCG@10': 0.04820222741000553, 'NDCG@20': 0.05980240776408196, 'NDCG@100': 0.06537120847042949}
+2026-02-12 21:15:25,915 - INFO - Best NDCG@20: 0.05980240776408196
+2026-02-12 21:15:25,915 - INFO - Test Dataset: {'Recall@5': 0.04544505173076533, 'Recall@10': 0.08088738557134871, 'Recall@20': 0.12037232807728422, 'Recall@100': 0.14210401834189523}
+2026-02-12 21:15:25,916 - INFO - Test Dataset: {'NDCG@5': 0.029375474641837745, 'NDCG@10': 0.040715963232141654, 'NDCG@20': 0.05076335216308246, 'NDCG@100': 0.05539228322148874}
+2026-02-12 21:15:25,931 - INFO - Best model saved to /home/ming/news_rec/Data/ckpt/tiger.pth
