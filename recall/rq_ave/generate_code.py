@@ -133,7 +133,5 @@ def main():
     print(f"the first 5 codes: {codes_array[:5]}")
     np.save(process_cfg['output_file'], codes_array)
 
-
-
 if __name__ == "__main__":
     main()

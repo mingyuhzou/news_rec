@@ -5,7 +5,7 @@ cfg={
     # 训练与推理通用设置
     'batch_size': 256,  # 训练时的 Batch 大小
     'infer_size': 96,  # 生成推荐结果（推理）时的 Batch 大小
-    'num_epochs': 20,  # 训练轮数
+    'num_epochs': 1,  # 训练轮数
     'lr': 1e-4,  # 优化器的学习率
     'device': 'cuda',  # 运行设备 (cuda 或 cpu)
     'seed': 2025,  # 随机种子，确保实验可重复性

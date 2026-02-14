@@ -61,13 +61,22 @@ class GenRecDataLoader(DataLoader):
             [torch.tensor([1 if elem!=pad_token else 0 for elem in h],dtype=torch.int64) for h in flattened_histories]
         )
 
-        flattened_targets = torch.stack(
-            [torch.tensor(item['target'], dtype=torch.int64) for item in batch]
-        )
-        return {
-            'history': flattened_histories,
-            'target': flattened_targets,
-            'attention_masks': attention_masks,
-            'ori_history':ori_history,
-        }
+        if self.dataset.mode=='recall':
+            return {
+                'history': flattened_histories,
+                'target':target,
+                'attention_masks': attention_masks,
+                'ori_history':ori_history,
+            }
+        else:
+
+            flattened_targets = torch.stack(
+                [torch.tensor(item['target'], dtype=torch.int64) for item in batch]
+            )
+            return {
+                'history': flattened_histories,
+                'target': flattened_targets,
+                'attention_masks': attention_masks,
+                'ori_history':ori_history,
+            }
 

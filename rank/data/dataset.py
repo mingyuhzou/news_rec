@@ -53,26 +53,35 @@ class trainDataset(Dataset):
         )
 
 class ValidDataset(Dataset):
-    def __init__(self, behaviors_file, item_dict_path, max_hist_len):
+    def __init__(self, behaviors_file, item_dict_path, max_hist_len,mode=None):
         self.behaviors = pl.read_parquet(behaviors_file)
         self.item_mapping = np.load(item_dict_path, allow_pickle=True).item() # 将原始的new_id转换为映射后的结果
         self.max_hist_len = max_hist_len
+        self.mode=mode
     def __len__(self):
         return len(self.behaviors)
     def __getitem__(self, idx):
         row = self.behaviors.row(idx, named=True)
 
         # 1. 处理历史记录：转为 ItemID 序列
-        history = [self.item_mapping.get(nid, 0) for nid in row['history']]
+        history = [self.item_mapping.get(nid, 0) for nid in row['history']] if not self.mode else row['history']
         if len(history) > self.max_hist_len:
             history = history[-self.max_hist_len:]
         while len(history) < self.max_hist_len:
             history.append(0)
 
         # 2. 处理候选集：转为 ItemID 序列
-        impressions = row['impressions']
-        cand_ids = [self.item_mapping.get(i.split('-')[0], 0) for i in impressions]
-        labels = [int(i.split('-')[1]) for i in impressions]
+        if self.mode is None:
+            impressions = row['impressions']
+            cand_ids = [self.item_mapping.get(i.split('-')[0], 0) for i in impressions]
+            labels = [int(i.split('-')[1]) for i in impressions]
+        else:
+            cand_ids = row['cands']
+            pos_item = row['labels'][0]  # 正样本 item
+
+            # 生成 0/1 label
+            labels = [1 if x == pos_item else 0 for x in cand_ids]
+
 
         return (
             torch.LongTensor(history),

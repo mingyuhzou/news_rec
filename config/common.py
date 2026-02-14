@@ -15,6 +15,6 @@ cfg={
 
     'code2item':os.path.join(data_path,'code2item.npy'),
 
-    'eval_data':os.path.join(data_path,'eval_U92113.parquet'),
-    'metric': os.path.join(data_path,'dev', 'valid_df_1_U92113.parquet'),
+    'eval_data':os.path.join(data_path,'dev','test_df.parquet'),
+    'metric':os.path.join(data_path,'dev','metric.parquet'),
 }
