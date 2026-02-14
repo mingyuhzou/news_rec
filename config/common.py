@@ -12,4 +12,9 @@ cfg={
     "user_dict":join(data_path,'user_dict.npy'),
     "item_dict":join(data_path,'item_dict.npy'),
     'news_file':os.path.join(data_path,'news.parquet'),
+
+    'code2item':os.path.join(data_path,'code2item.npy'),
+
+    'eval_data':os.path.join(data_path,'eval_U92113.parquet'),
+    'metric': os.path.join(data_path,'dev', 'valid_df_1_U92113.parquet'),
 }

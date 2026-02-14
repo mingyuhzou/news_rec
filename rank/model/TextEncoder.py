@@ -1,8 +1,6 @@
 import torch
 import torch.nn.functional as F
 import torch.nn as nn
-from typing import Tuple,Optional
-
 
 class AdditiveAttention(nn.Module):
     # 加性注意力池化，将N个词向量聚合为一个代表整个文章的向量
@@ -35,46 +33,27 @@ class AdditiveAttention(nn.Module):
 
 
 class TextEncoder(nn.Module):
-    def __init__(self, hparams,weight=None):
+    def __init__(self, hparams, pretrained_vectors=None):
         super(TextEncoder, self).__init__()
-        self.hparams = hparams
-
-        # 用于将新闻token做词嵌入，可以选择是否传入预训练好的embedding向量
-        if weight is None:
-            self.embedding = nn.Embedding(hparams['vocab_size'], hparams['embed_dim'], padding_idx=0)
+        # 使用预训练好的新闻矩阵
+        if pretrained_vectors is not None:
+            self.embedding = nn.Embedding.from_pretrained(
+                pretrained_vectors,
+                freeze=True, # 通常建议冻结，因为 NLP 模型产出的语义已经很稳健
+                padding_idx=0
+            )
         else:
-            self.embedding = nn.Embedding.from_pretrained(weight, freeze=False,padding_idx=0)
+            self.embedding = nn.Embedding(hparams['item_num'], hparams['embed_dim'], padding_idx=0)
 
-        # 转换维度
-        self.input_projection=nn.Linear(hparams['embed_dim'],hparams['encoder_size'])
+        # 投影层：将 NLP 向量维度（如 768）转为模型的 encoder_size（如 256）
+        self.input_projection = nn.Linear(hparams['embed_dim'], hparams['encoder_size'])
 
-        # 2. 多头自注意力层,embed_dim指定模型的输入维度，输出维度默认等于输入维度
-        self.multihead_attention = nn.MultiheadAttention(
-            embed_dim=self.hparams['encoder_size'],
-            num_heads=hparams['nhead'],
-            dropout=0.1,
-            batch_first=True
-        )
-        # 3. 注意力池化层
-        self.additive_attention = AdditiveAttention(hparams['encoder_size'], hparams['v_size'])
-
-    def forward(self, x):
+    def forward(self, news_ids):
         """
-        将新闻中各个token embedding聚合为一个embedding
-        :param x: [batch_size, seq_len], 划分后的新闻标题数据，固定长度为seq_len
-        :return: [batch_size,encoder_size]
+        :param news_ids: [Batch, num_docs] 形状的 ID 张量
+        :return: [Batch, num_docs, encoder_size]
         """
-        # 掩码
-        padding_mask=(x==0)
-        # 注意掩码不能全为true，否则softmax中会产生数值错误
-        padding_mask[padding_mask.all(dim=1), 0] = False
-
-        x = F.dropout(self.embedding(x), p=0.2, training=self.training) # [B,seq_len,embed_dim]
-        x = self.input_projection(x)  # [B, seq_len, encoder_dim]
-
-        output,_=self.multihead_attention(x,x,x,key_padding_mask=padding_mask) # [B,seq_len,embed_dim]
-
-        output = F.dropout(output, p=0.2, training=self.training)
-
-        output,_=self.additive_attention(output,mask=padding_mask) #　[B,encoder_size]
-        return output
+        # 1. 查表获取向量 [Batch, num_docs, 768]
+        news_vecs = self.embedding(news_ids)
+        # 2. 线性转换 [Batch, num_docs, encoder_size]
+        return self.input_projection(news_vecs)

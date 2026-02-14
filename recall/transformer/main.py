@@ -2,7 +2,7 @@ from tqdm import tqdm
 import torch
 import torch.optim as optim
 import logging
-from data.tf_dataset import GenRecDataset, GenRecDataLoader
+from recall.transformer.data.tf_dataset import GenRecDataset, GenRecDataLoader
 from config.model.tf import cfg
 from recall.utils.metrics import calculate_pos_index,ndcg_at_k,recall_at_k
 from recall.transformer.model.transformer import TIGER

@@ -18,7 +18,7 @@ def main():
     dataloader = DataLoader(
         data,
         batch_size=model_cfg["batch_size"],
-        shuffle=True,
+        shuffle=False,
         num_workers=model_cfg["num_workers"]
     )
 

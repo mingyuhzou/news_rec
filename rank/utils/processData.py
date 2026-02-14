@@ -3,6 +3,9 @@ import numpy as np
 import polars as pl
 import pickle
 import re
+
+import torch
+
 from config.model.nrms import hparams
 
 def processW2vec(news_file,W2vec_file,save_path):
@@ -67,3 +70,23 @@ def processNews(news_path,w2v_path,max_len=20):
     news_dict['<PAD>']=[0]*max_len
 
     return news_dict
+
+def prepare_embedding_matrix(item_emb_path, item_dict_path):
+    # 1. 加载数据
+    item_emb_df = pl.read_parquet(item_emb_path)
+    # 这里的 item_dict 是你在 notebook 中生成的映射表 {news_id: ItemID}
+    item_id_mapping = np.load(item_dict_path, allow_pickle=True).item()
+
+    # 2. 确定维度
+    max_id = max(item_id_mapping.values())
+    emb_dim = len(item_emb_df['embedding'][0])
+
+    # 3. 初始化矩阵 (Index 0 留给 <PAD>)
+    matrix = np.zeros((max_id + 1, emb_dim), dtype='float32')
+
+    # 4. 填充矩阵
+    for row in item_emb_df.iter_rows(named=True):
+        idx = row['ItemID']
+        matrix[idx] = np.array(row['embedding'])
+
+    return torch.from_numpy(matrix)
