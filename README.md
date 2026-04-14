@@ -28,7 +28,7 @@ behaviors.csv数据示例
 
 
 
-召回模型参考https://github.com/XiaoLongtaoo/TIGER实现Tiger，做生成式召回，该模型比较适合Mind的数据（缺少用户特征，有完整的历史点击序列）。Tiger所需的物品embedding通过在本地部署nlp模型得到，可以使用all-MiniLM-L6-v2。
+召回模型参考https://github.com/XiaoLongtaoo/TIGER，实现Tiger，做生成式召回，该模型比较适合Mind的数据（缺少用户特征，有完整的历史点击序列）。Tiger所需的物品embedding通过在本地部署nlp模型得到，可以使用all-MiniLM-L6-v2。
 
 排序模型复现19年的NRMS，Neural News Recommendation with Multi-Head Self-Attention，该模型基于Mind数据集实现，结构相对简单，易于实现。
 
