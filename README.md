@@ -68,7 +68,7 @@ NRMS 主要包含：
 建议环境：
 
 ```text
-Python >= 3.8
+Python >= 3.10
 PyTorch >= 1.12
 CUDA >= 11.0
 GPU memory >= 16GB
