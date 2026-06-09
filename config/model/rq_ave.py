@@ -1,7 +1,7 @@
 import os
 from config.common import cfg as config
 cfg={
-    "in_dim": 768,
+    "in_dim": 384,
     "num_emb_list": [ 256,256,256 ],
     "beta": 0.25,
     "layers": [ 512,256,128,64],

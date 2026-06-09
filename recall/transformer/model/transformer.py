@@ -19,6 +19,7 @@ class TIGER(nn.Module):
             decoder_start_token_id=config['pad_token_id'],
             feed_forward_proj=config['feed_forward_proj'],
         )
+        self.code_len=config['code_len']
         self.model=T5ForConditionalGeneration(t5config)
 
     @property
@@ -40,13 +41,13 @@ class TIGER(nn.Module):
         outputs=self.model(input_ids,attention_mask=attention_mask,labels=labels)
         return outputs.loss,outputs.logits
 
-    def generate(self,input_ids,attention_mask=None,labels=None,num_beams=20):
+    def generate(self,input_ids,attention_mask=None,labels=None,num_beams=20,num_return_sequences=20):
         # 使用beam search生成预测物品的编码，输入维度为[B,history_len*code_num]，在dataloader中展平过
         # 返回[B*num_return_sequences(候选物品数),max_len] max_len的第一位是decoder_start_token_id被设置为了0
         return self.model.generate(
             input_ids,
             attention_mask=attention_mask,
-            max_length=5, #
+            max_length=self.code_len+2, # start code &eos
             num_beams=num_beams,
             num_return_sequences=num_beams,
         )

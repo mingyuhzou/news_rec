@@ -1,13 +1,16 @@
 from os.path import join
 import os
+from pathlib import Path
 
-data_path='/home/ming/news_rec/Data'
+ROOT_DIR = Path(__file__).resolve().parent.parent
+data_path = ROOT_DIR / "Data"
+
 cfg={
     "data_path":data_path,
     "train_data_path": join(data_path,'train'),
-    "dev_data_path": join(data_path,'dev'),
-    "emb_model_path":'../Embedding_model',
-    "log_dir":"/home/ming/news_rec/log",
+    "test_data_path": join(data_path,'test'),
+    "emb_model_path":join(data_path,'all-MiniLM-L6-v2'),
+    "log_dir":join(ROOT_DIR,"log"),
     "embed_path":join(data_path,'embedding'),
     "user_dict":join(data_path,'user_dict.npy'),
     "item_dict":join(data_path,'item_dict.npy'),
