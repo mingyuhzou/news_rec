@@ -1,19 +1,10 @@
 # Two-Stage News Recommendation System
 
-本项目实现了一个基于 [MIND](https://msnews.github.io/) 数据集的两阶段新闻推荐系统，整体采用 **Recall + Rank** 架构，在控制计算成本的同时提升推荐效果。
 
-项目可在 ** ubuntu 25.10 5070ti 16GB 显存 python 3.10*环境下可运行。
+参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER) 实现生成式召回模型，对比使用RQ-VAE和[RQ-KMEANS](https://github.com/EdoardoBotta/rq-kmeans)方法构造sid
 
-## 项目简介
+该方法较适合 MIND 数据集，因为 MIND 缺少显式用户特征与物品特征，但提供了完整且丰富（mean len > 100）的用户历史点击序列。模型通过用户历史行为生成候选新闻的 Semantic ID，从而完成候选集召回。
 
-本项目包含两个核心阶段：
-
-1. **召回阶段（Recall）**
-   参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER) 实现生成式召回模型。
-   该方法较适合 MIND 数据集，因为 MIND 缺少显式用户特征，但提供了完整的用户历史点击序列。模型通过用户历史行为生成候选新闻的 Semantic ID，从而完成候选集召回。
-2. **排序阶段（Rank）**
-   复现 2019 年的 [NRMS](https://aclanthology.org/D19-1671/) 模型, *Neural News Recommendation with Multi-Head Self-Attention*。
-   NRMS 使用多头自注意力机制建模新闻表示和用户表示，结构清晰，易于实现，适合作为新闻推荐排序模型。
 
 ## 数据集
 
@@ -49,38 +40,12 @@ MIND 是微软亚洲研究院基于 Microsoft News 平台匿名用户行为日�
 
 TIGER 的核心思想是先将物品表示离散化为 Semantic ID，然后将推荐任务转化为序列生成任务(history click -> next click)。对于新闻推荐场景，可以使用新闻标题或正文生成新闻 embedding，再通过 RQ-VAE 等方法得到离散 Semantic ID，最后训练 Transformer 模型根据用户历史点击序列生成目标新闻 ID。
 
-本项目中，新闻 embedding 通过本地部署文本编码模型生成，默认使用：
+本项目中，新闻 embedding 通过本地部署文本编码模型[all-MiniLM-L6-v2](https://modelscope.cn/models/sentence-transformers/all-MiniLM-L6-v2)生成，这里仅单独使用新闻标题。
 
-- [all-MiniLM-L6-v2](https://modelscope.cn/models/sentence-transformers/all-MiniLM-L6-v2)
-
-### Rank：NRMS 排序模型
-
-排序模型复现 NRMS，即 *Neural News Recommendation with Multi-Head Self-Attention*。
-
-NRMS 主要包含：
-
-- 新闻编码器：使用多头自注意力建模新闻标题中的词级语义信息；
-- 用户编码器：使用多头自注意力建模用户历史点击新闻之间的关系；
-- 点击预测层：计算用户表示与候选新闻表示之间的匹配分数。
 
 ## 环境要求
 
-建议环境：
-
-```text
-Python >= 3.10
-PyTorch >= 1.12
-CUDA >= 11.0
-GPU memory >= 16GB
-```
-
-安装依赖：
-
-```bash
-pip install modelscope
-```
-
-如项目中提供了 `requirements.txt`，也可以使用：
+在 ubnutu 25.10 python=3.10 5070ti 下可以正常运行 
 
 ```bash
 pip install -r requirements.txt.txt
@@ -92,7 +57,7 @@ pip install -r requirements.txt.txt
 
 从 [MIND 官网](https://msnews.github.io/) 下载 zip 格式数据集：`MINDsmall_train.zip`
 
-将数据集放入 `Data` 目录下，例如：
+将数据集放入 `Data` 目录下：
 
 ```text
 Data/
@@ -127,12 +92,12 @@ notebooks/embedding.ipynb
 - 使用 `all-MiniLM-L6-v2` 根据新闻标题生成新闻 embedding。
 
 ### 2. 生成 Semantic ID
-从DATA/ckpt 选择RQ—VAE权重，填写到config/generate的model_weight_path 
+从DATA/ckpt 选择RQ—VAE权重，填写到config/generate的model_weight_path，在config/process/generate_code中的sid_method可以选择编码方式（RQ-VAE/RQ-KMEANS） 
 
 运行 RQ-VAE 模块，将新闻 embedding 离散化为 Semantic ID：
 
 ```bash
-python recall/rq-vae/main.py
+python recall/rq-vae/generate_code.py
 ```
 
 该步骤输出每条新闻对应的离散 Semantic ID，供生成式召回模型训练使用。
@@ -147,17 +112,11 @@ python recall/transformer/main.py
 
 该阶段根据用户历史点击序列训练生成式召回模型，并在验证集上评估召回效果。
 
-### 4. 训练排序模型
-
-运行 NRMS 排序模型，对召回阶段得到的候选新闻进行精排。
-
-如果项目中已提供排序入口，可按实际路径执行，例如：
-
-```bash
-python rank/nrms/main.py
-```
 
 ## 训练耗时
+sid构建
+RQ-KMEANS在设置了早停后比RQ-VAE快，后者大约
+
 
 在 16GB 显存环境下，召回模型训练耗时约为：
 
@@ -172,35 +131,48 @@ python rank/nrms/main.py
 
 ```text
 .
+├── config/
+│   ├── model/
+│   │     └── nrms.py # 排序模型参数
+│   │     └── tf.py # 召回模型参数
+│   ├── process/
+│   │     └── generate_code.py # RQ-VAE &RQ-KMEANS 参数
 ├── Data/
-│   ├── MINDsmall_train/
-│   └── all-MiniLM-L6-v2/
+│   ├── MINDsmall_train/  # 数据集
+│   └── all-MiniLM-L6-v2/ # 文本编码模型
 │
 ├── notebooks/
-│   └── embedding.ipynb
+│   └── embedding.ipynb  # 处理数据集
 │
 ├── recall/
-│   ├── rq-vae/
-│   │   └── main.py
+│   ├── rq-vae/  # 编码sid
+│   │      └── data  # dataset
+│   │      └── kernels # RQ-KMEANS 算子优化
+│   │      └── model   # RQ-VAE模型
+│   │      └── trainer # RQ-VAE训练类
+│   │      └── generate_code.py # 构造 itemid->sid，根据参数选择sid转换方法
 │   └── transformer/
-│       └── main.py
-│
-├── rank/
-│   └── nrms/
-│       └── main.py
+│   │      └── data  # dataset
+│   │      └── model   # RQ-VAE模型
+│   └──    └── main.py # 训练tiger模型并评估
 │
 ├── README.md
 └── requirements.txt
 ```
 
-## 指标
-Tiger指标
+## 指标	
+recall/transformer/runs 可以看到指标 
 
-|  指标   |          值          |
-| :-----: | :------------------: |
-|  Hit@1  | 0.007167844085221587 |
-| Hit@10  | 0.023023105741813484 |
-| Hit@20  | 0.042645659535136736 |
-| NDCG@1  | 0.007167844085221587 |
-| NDCG@10 | 0.013686004393870238 |
-| NDCG@20 | 0.018574634632242938 |
+| 方法     | Hit@1    | Hit@10   | Hit@20   | NDCG@1   | NDCG@10  | NDCG@20  |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| RQ-VAE   | 0.007168 | 0.023023 | 0.042646 | 0.007168 | 0.013686 | 0.018575 |
+| RQ-MEANS | 0.007147 | 0.025737 | 0.048941 | 0.007147 | 0.014782 | 0.020576 |
+
+| 指标    | RQ-MEANS - RQ-VAE | 相对变化 |
+| ------- | ----------------- | -------- |
+| Hit@1   | -0.000021         | -0.29%   |
+| Hit@10  | +0.002714         | +11.79%  |
+| Hit@20  | +0.006296         | +14.76%  |
+| NDCG@1  | -0.000021         | -0.29%   |
+| NDCG@10 | +0.001096         | +8.01%   |
+| NDCG@20 | +0.002002         | +10.78%  |
