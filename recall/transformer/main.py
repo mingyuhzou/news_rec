@@ -1,12 +1,14 @@
 from tqdm import tqdm
 import torch
 import torch.optim as optim
-import logging
 import os
+import logging
 from recall.transformer.data.tf_dataset import GenRecDataset, GenRecDataLoader
 from config.model.tf import cfg
 from recall.utils.metrics import ndcg_at_k,recall_at_k
 from recall.transformer.model.transformer import TIGER
+from utils.logger import create_exp_dir
+
 
 def train(model,train_loader,optimizer,device):
     model.train()
@@ -95,14 +97,18 @@ def evaluate(model, eval_loader, beam_size, device):
 
 
 
-def main():
+def main(cfg):
+    cfg = create_exp_dir(cfg)
+
     logging.basicConfig(
-        filename=cfg['log_path'],
+        filename=cfg["log_path"],
         filemode="w",
         level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s'
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        force=True,
     )
 
+    logging.info(f"Experiment dir: {cfg['exp_dir']}")
     logging.info(f"Configuration: {cfg}")
 
     # Initialize model
@@ -153,5 +159,4 @@ def main():
 
 
 if __name__ == "__main__":
-
-    main()
+    main(cfg)
