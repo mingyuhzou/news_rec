@@ -22,7 +22,7 @@ cfg={
     'dropout_rate': 0.1,  # Dropout 概率
     'vocab_size': 1025,  # 词表大小
     'pad_token_id': 0,  # 填充 Token 的 ID
-    'eos_token_id': 0,  # 序列结束 Token 的 ID
+    'eos_token_id': 1,  # 序列结束 Token 的 ID
     'feed_forward_proj': 'relu',  # 前馈层激活函数类型
 
     # 数据与序列处理

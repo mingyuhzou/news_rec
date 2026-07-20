@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-data_path = ROOT_DIR / "Data"
+data_path = ROOT_DIR / "tmp"
 
 cfg={
     "data_path":data_path,
