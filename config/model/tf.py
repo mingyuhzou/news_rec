@@ -1,11 +1,11 @@
 import os
 from config.common import cfg as common_config
 from config.process.generate_code import cfg as generate_code
-from config.model.sid_generate import cfg as rq_ave
+from config.model.generate_sid import cfg as rq_ave
 cfg={
     # 训练与推理通用设置
-    'batch_size': 128,  # 训练时的 Batch 大小
-    'infer_size': 96,  # 生成推荐结果（推理）时的 Batch 大小
+    'batch_size': 256,  # 训练时的 Batch 大小
+    'infer_size': 128,  # 生成推荐结果（推理）时的 Batch 大小
     'num_epochs': 51,  # 训练轮数
     'lr': 1e-4,  # 优化器的学习率
     'device': 'cuda',  # 运行设备 (cuda 或 cpu)
@@ -15,8 +15,8 @@ cfg={
     # 模型架构参数 (Transformer/T5 相关)
     'num_layers': 4,  # 编码器层数
     'num_decoder_layers': 4,  # 解码器层数
-    'd_model': 128,  # 隐藏层维度
-    'd_ff': 512,  # 前馈网络 (FFN) 的维度
+    'd_model': 256,  # 隐藏层维度
+    'd_ff': 1024,  # 前馈网络 (FFN) 的维度
     'num_heads': 4,  # 多头注意力机制的头数
     'd_kv': 64,  # Key 和 Value 向量的维度
     'dropout_rate': 0.1,  # Dropout 概率
@@ -38,5 +38,5 @@ cfg={
     # 文件保存与日志
     'log_path': os.path.join(common_config['log_dir'],'tiger.log'),  # 日志保存路径
     'save_path':os.path.join(common_config["data_path"],"ckpt/tiger.pth"),  # 模型检查点保存路径
-
+    'model_name':'T5',
 }

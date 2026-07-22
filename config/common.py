@@ -7,6 +7,7 @@ data_path = ROOT_DIR / "tmp"
 
 cfg={
     "data_path":data_path,
+    'file_name':'MINDlarge_train',
     "train_data_path": join(data_path,'train'),
     "test_data_path": join(data_path,'test'),
     "emb_model_path":join(data_path,'all-MiniLM-L6-v2'),

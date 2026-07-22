@@ -114,18 +114,16 @@ python recall/transformer/main.py
 
 
 ## 训练耗时
-sid构建
-RQ-KMEANS在设置了早停后比RQ-VAE快，后者大约
+SID构建
+
++ RQ-VAE 耗时`12mins`
++ RQ-KMEANS  设置早停后比RQ-VAE快，大约`3~5mins`
 
 
-在 16GB 显存环境下，召回模型训练耗时约为：
 
-| 阶段            | 时间      |
-| --------------- | --------- |
-| 单个 epoch 训练 | 约 40 秒  |
-| 单次验证        | 约 2 分钟 |
+T5模型在给定的参数下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`25mins`，通过调整参数可以在12GB显存下运行
 
-实际耗时会受到 GPU 型号、batch size、序列长度和候选集规模影响。
+
 
 ## 项目目录
 
@@ -161,7 +159,7 @@ RQ-KMEANS在设置了早停后比RQ-VAE快，后者大约
 ```
 
 ## 指标	
-recall/transformer/runs 可以看到指标 
+`recall/transfor
 
 | 方法     | Hit@1    | Hit@10   | Hit@20   | NDCG@1   | NDCG@10  | NDCG@20  |
 | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
