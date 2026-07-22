@@ -1,4 +1,4 @@
-# Two-Stage News Recommendation System
+#  News Recommendation System
 
 
 参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER) 实现生成式召回模型，对比使用RQ-VAE和[RQ-KMEANS](https://github.com/EdoardoBotta/rq-kmeans)方法构造sid
@@ -8,9 +8,7 @@
 
 ## 数据集
 
-本项目使用 **MIND small** 数据集。
-
-MIND 是微软亚洲研究院基于 Microsoft News 平台匿名用户行为日志构建的新闻推荐数据集，包含新闻内容、用户历史点击行为以及曝光日志。本文使用的是 `MIND small` 版本。
+本项目基于**MIND** 数据集搭建，MIND 是微软亚洲研究院基于 Microsoft News 平台匿名用户行为日志构建的新闻推荐数据集，包含新闻内容、用户历史点击行为以及曝光日志。本文使用的是 `MIND small` 版本。
 
 ### news.csv 示例
 
@@ -34,14 +32,6 @@ MIND 是微软亚洲研究院基于 Microsoft News 平台匿名用户行为日�
 
 
 
-### Recall：TIGER-style 生成式召回
-
-召回模型参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER)实现。
-
-TIGER 的核心思想是先将物品表示离散化为 Semantic ID，然后将推荐任务转化为序列生成任务(history click -> next click)。对于新闻推荐场景，可以使用新闻标题或正文生成新闻 embedding，再通过 RQ-VAE 等方法得到离散 Semantic ID，最后训练 Transformer 模型根据用户历史点击序列生成目标新闻 ID。
-
-本项目中，新闻 embedding 通过本地部署文本编码模型[all-MiniLM-L6-v2](https://modelscope.cn/models/sentence-transformers/all-MiniLM-L6-v2)生成，这里仅单独使用新闻标题。
-
 
 ## 环境要求
 
@@ -55,23 +45,23 @@ pip install -r requirements.txt.txt
 
 ### 1. 下载 MIND small 数据集
 
-从 [MIND 官网](https://msnews.github.io/) 下载 zip 格式数据集：`MINDsmall_train.zip`
+从 [MIND 官网](https://msnews.github.io/) 下载 zip 格式数据集：`MINDsmall_train.zip`或其他版本的文件（需修改config中对应的属性）
 
-将数据集放入 `Data` 目录下：
+将数据集放入 `tmp` 目录下：
 
 ```text
-Data/
+tmp/
 ├── MINDsmall_train.zip
 ```
 
 ### 2. 下载文本编码模型
 
-下载 [all-MiniLM-L6-v2](https://modelscope.cn/models/sentence-transformers/all-MiniLM-L6-v2) 到 `Data` 目录下：
+下载 [all-MiniLM-L6-v2](https://modelscope.cn/models/sentence-transformers/all-MiniLM-L6-v2) 到 `tmp` 目录下：
 
 ```bash
 modelscope download \
   --model sentence-transformers/all-MiniLM-L6-v2 \
-  --local_dir Data/all-MiniLM-L6-v2
+  --local_dir tmp/all-MiniLM-L6-v2
 ```
 
 
@@ -80,10 +70,10 @@ modelscope download \
 
 ### 1. 数据预处理与新闻 embedding 生成
 
-运行 notebook：
+运行 preprocess,py：
 
 ```text
-notebooks/embedding.ipynb
+python preprocess.py
 ```
 
 - 解析 MIND 原始数据；
@@ -102,7 +92,7 @@ python recall/rq-vae/generate_code.py
 
 该步骤输出每条新闻对应的离散 Semantic ID，供生成式召回模型训练使用。
 
-### 3. 训练召回模型
+### 3. 训练模型
 
 运行 Transformer 召回模型：
 
@@ -159,7 +149,7 @@ T5模型在给定的参数下，train的一个epoch耗时`10mins`，evaluate的�
 ```
 
 ## 指标	
-`recall/transfor
+
 
 | 方法     | Hit@1    | Hit@10   | Hit@20   | NDCG@1   | NDCG@10  | NDCG@20  |
 | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
