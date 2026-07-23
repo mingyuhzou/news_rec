@@ -8,7 +8,8 @@ def create_exp_dir(cfg):
 
     exp_name = (
         f"{time_str}_"
-        f"TIGER_"
+        f"{cfg['model_name']}_"
+        f"{cfg['sid_method']}_"
         f"lr{cfg['lr']}_"
         f"bs{cfg['batch_size']}_"
         f"beam{cfg['beam_size']}_"

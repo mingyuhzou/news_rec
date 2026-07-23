@@ -5,3 +5,4 @@ tqdm==4.67.3
 sentence_transformers
 modelscope
 pyarrow
+tensorboard

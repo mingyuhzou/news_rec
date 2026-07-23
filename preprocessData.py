@@ -106,23 +106,24 @@ def save_processed_data(
 
 
 
-def prepare_data(data_dict):
+def prepare_data(data_list):
 
     rows=[]
 
-    for user_id, sequence in data_dict.items():
+    for item in data_list:
 
         rows.append(
             {
-                "user_id":user_id,
-                "history":sequence[:-1],
-                "target":sequence[-1]
+                "user_id": item["user_id"],
+                "history": item["history"],
+                "target": item["target"],
+                "click": item["click"],
+                "unclick": item["unclick"]
             }
         )
 
 
     return pl.DataFrame(rows)
-
 
 
 # =========================
@@ -404,14 +405,10 @@ def preprocessData():
         behaviors["history"]
         .apply(map_history)
     )
-
-
     behaviors["click"] = (
         behaviors["click"]
         .apply(map_list)
     )
-
-
     behaviors["unclick"] = (
         behaviors["unclick"]
         .apply(map_list)
@@ -432,6 +429,11 @@ def preprocessData():
     train={}
     test={}
 
+    train_click = {}
+    train_unclick = {}
+
+    test_click = {}
+    test_unclick = {}
 
     for _,row in behaviors.iterrows():
 
@@ -444,20 +446,27 @@ def preprocessData():
 
             test[row["user_id"]] = seq
 
+            train_click[row["user_id"]] = row["click"]
+            train_unclick[row["user_id"]] = row["unclick"]
+
+            test_click[row["user_id"]] = row["click"]
+            test_unclick[row["user_id"]] = row["unclick"]
 
 
-    print(
-        f"Train users: {len(train)}"
+
+    print(f"Train users: {len(train)}")
+    print(f"Test users: {len(test)}")
+
+    train_df = prepare_data(
+        train,
+        train_click,
+        train_unclick
     )
-
-    print(
-        f"Test users: {len(test)}"
+    test_df = prepare_data(
+        test,
+        test_click,
+        test_unclick
     )
-
-
-    train_df = prepare_data(train)
-
-    test_df = prepare_data(test)
 
 
     save_processed_data(
@@ -465,29 +474,20 @@ def preprocessData():
         test_df
     )
 
-
     print("Train/test saved")
-
-
 
     # =========================
     # item embedding
     # =========================
 
     print("[8/8] Generating item embeddings...")
-
-
     model = SentenceTransformer(
         cfg["emb_model_path"],
         device="cuda"
     )
-
-
     print("Embedding model loaded")
 
-
     item_embeddings=[]
-
 
     for _,row in tqdm(
         news.iterrows(),
@@ -496,21 +496,14 @@ def preprocessData():
     ):
 
         news_id = row["news_id"]
-
-
         if news_id not in news2idx:
             continue
 
-
         item_id = news2idx[news_id]
-
-
         embedding = model.encode(
             row["title"],
             normalize_embeddings=True
         )
-
-
         item_embeddings.append(
             {
                 "item_id":item_id,
@@ -518,22 +511,13 @@ def preprocessData():
             }
         )
 
+    print(f"Generated embeddings: {len(item_embeddings)}")
 
 
-    print(
-        f"Generated embeddings: {len(item_embeddings)}"
-    )
+    item_emb_df = pd.DataFrame(item_embeddings)
 
 
-    item_emb_df = pd.DataFrame(
-        item_embeddings
-    )
-
-
-    os.makedirs(
-        cfg["embed_path"],
-        exist_ok=True
-    )
+    os.makedirs(cfg["embed_path"],exist_ok=True)
 
 
     item_emb_df.to_parquet(
@@ -547,11 +531,9 @@ def preprocessData():
 
     print("Embedding saved")
 
-
     print("="*50)
     print("Preprocessing finished")
     print("="*50)
-
 
     return item_emb_df
 
