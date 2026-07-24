@@ -1,3 +1,4 @@
+import argparse
 import os
 import re
 import zipfile
@@ -55,10 +56,6 @@ def process_impression(row):
 
             elif label == "0":
                 unclick_items.append(news_id)
-
-
-    # click加入history
-    history_items.extend(click_items)
 
 
     return (
@@ -130,7 +127,7 @@ def prepare_data(data_list):
 # Main preprocess
 # =========================
 
-def preprocessData():
+def preprocessData(skip_embedding=False):
 
     print("="*50)
     print("Start preprocessing")
@@ -149,8 +146,7 @@ def preprocessData():
 
     zip_path = join(
         data_path,
-        cfg['file_name'],
-        'zip'
+        f"{cfg['file_name']}.zip"
     )
 
 
@@ -170,7 +166,7 @@ def preprocessData():
         ) as zip_ref:
 
             zip_ref.extractall(
-                data_path
+                extract_path
             )
 
         print("Extraction finished")
@@ -426,47 +422,55 @@ def preprocessData():
     print("[7/8] Preparing train/test...")
 
 
-    train={}
-    test={}
+    examples = []
 
-    train_click = {}
-    train_unclick = {}
+    for _, row in behaviors.iterrows():
+        history = row["history"].split()
+        clicks = row["click"]
+        unclicks = row["unclick"]
 
-    test_click = {}
-    test_unclick = {}
+        # 测试指标需要一个 ground-truth click。
+        if not history or not clicks:
+            continue
 
-    for _,row in behaviors.iterrows():
+        examples.append({
+            "user_id": int(row["user_id"]),
+            "history": history,
+            "target": clicks[0],
+            "click": clicks,
+            "unclick": unclicks
+        })
 
-        seq = row["history"].split()
-
-
-        if len(seq)>2:
-
-            train[row["user_id"]] = seq[:-1]
-
-            test[row["user_id"]] = seq
-
-            train_click[row["user_id"]] = row["click"]
-            train_unclick[row["user_id"]] = row["unclick"]
-
-            test_click[row["user_id"]] = row["click"]
-            test_unclick[row["user_id"]] = row["unclick"]
-
-
-
-    print(f"Train users: {len(train)}")
-    print(f"Test users: {len(test)}")
-
-    train_df = prepare_data(
-        train,
-        train_click,
-        train_unclick
+    # 按用户而不是按样本划分，保证同一用户不会同时出现在两侧。
+    example_users = np.array(
+        sorted({item["user_id"] for item in examples}),
+        dtype=np.int64
     )
-    test_df = prepare_data(
-        test,
-        test_click,
-        test_unclick
+    rng = np.random.default_rng(cfg["user_split_seed"])
+    rng.shuffle(example_users)
+
+    test_user_count = max(
+        1,
+        int(round(len(example_users) * cfg["test_user_ratio"]))
     )
+    test_users = set(example_users[:test_user_count].tolist())
+
+    train_rows = [
+        item for item in examples
+        if item["user_id"] not in test_users
+    ]
+    test_rows = [
+        item for item in examples
+        if item["user_id"] in test_users
+    ]
+
+    print(f"Train users: {len(example_users) - len(test_users)}")
+    print(f"Test users: {len(test_users)}")
+    print(f"Train samples: {len(train_rows)}")
+    print(f"Test samples: {len(test_rows)}")
+
+    train_df = prepare_data(train_rows)
+    test_df = prepare_data(test_rows)
 
 
     save_processed_data(
@@ -475,6 +479,10 @@ def preprocessData():
     )
 
     print("Train/test saved")
+
+    if skip_embedding:
+        print("Skipping item embedding generation")
+        return None
 
     # =========================
     # item embedding
@@ -539,4 +547,11 @@ def preprocessData():
 
 
 if __name__ == "__main__":
-    preprocessData()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--skip-embedding",
+        action="store_true",
+        help="only rebuild train/test parquet files"
+    )
+    args = parser.parse_args()
+    preprocessData(skip_embedding=args.skip_embedding)

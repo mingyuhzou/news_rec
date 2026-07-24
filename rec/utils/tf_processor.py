@@ -47,23 +47,18 @@ def process_data_qwen(
 
         # target SID
         target = item2code[int(row.target)]
-
         target = target + [EOS_TOKEN]
-
 
         # ===== training =====
         input_ids = history + target
-
         labels = (
             [-100] * len(history)
             +
             target
         )
 
-
         # ===== generation =====
         generate_input_ids = history
-
 
         processed_data.append({
 

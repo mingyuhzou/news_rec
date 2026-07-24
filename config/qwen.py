@@ -16,7 +16,7 @@ cfg={
     'early_stop':10,
 
     'hidden_size':256,
-    'intermediate_size':1024,
+    'intermediate_size':768,
     'num_hidden_layers':4,
     'num_attention_heads':4,
 
@@ -36,7 +36,7 @@ cfg={
 
     'code_len':len(rq_ave['num_emb_list'])+1,# 加一是因为生成sid时会往后补一位解决冲突
 
-    'beam_size':21,
+    'beam_size':20,
     'log_path':
         os.path.join(
             common_config['log_dir'],

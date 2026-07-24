@@ -15,6 +15,8 @@ cfg={
     "embed_path":join(data_path,'embedding'),
     "user_dict":join(data_path,'user_dict.npy'),
     "item_dict":join(data_path,'item_dict.npy'),
+    "user_split_seed": 2025,
+    "test_user_ratio": 0.2,
     'news_file':os.path.join(data_path,'news.parquet'),
 
     'code2item':os.path.join(data_path,'code2item.npy'),

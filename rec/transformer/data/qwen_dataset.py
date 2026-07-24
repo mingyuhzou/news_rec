@@ -52,34 +52,16 @@ class QwenGenRecDataLoader(DataLoader):
 
 
     def collate_fn(self, batch):
-
+        '''Qwen模型是左padding'''
         pad_token = self.dataset.PAD_TOKEN
+        input_ids = [ item["input_ids"] for item in batch ]
 
+        labels = [ item["labels"] for item in batch ]
+        generate_input_ids = [ item["generate_input_ids"]  for item in batch ]
 
-        input_ids = [
-            item["input_ids"]
-            for item in batch
-        ]
+        max_len = max( len(x) for x in input_ids )
 
-        labels = [
-            item["labels"]
-            for item in batch
-        ]
-        generate_input_ids = [
-            item["generate_input_ids"]
-            for item in batch
-        ]
-
-        max_len = max(
-            len(x)
-            for x in input_ids
-        )
-
-        generate_max_len = max(
-            len(x)
-            for x in generate_input_ids
-        )
-        
+        generate_max_len = max( len(x) for x in generate_input_ids )
         
         batch_generate_ids=[]
         batch_generate_mask=[]
@@ -87,39 +69,28 @@ class QwenGenRecDataLoader(DataLoader):
         batch_labels = []
         batch_attention = []
 
-
         for x, y in zip(input_ids, labels):
-
             padding_len = max_len - len(x)
-
 
             batch_input_ids.append(
                 [pad_token] * padding_len + x
             )
-
-
             batch_labels.append(
                 [-100] * padding_len + y
             )
-
-
             batch_attention.append(
                 [0] * padding_len
                 +
                 [1] * len(x)
             )
         for x in generate_input_ids:
-
             padding_len = generate_max_len - len(x)
-        
             batch_generate_ids.append(
                 [pad_token]*padding_len + x
             )
-        
             batch_generate_mask.append(
                 [0]*padding_len + [1]*len(x)
             )
-
 
         return {
         

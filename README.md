@@ -8,7 +8,7 @@
 
 ## 数据集
 
-本项目基于**MIND** 数据集搭建，MIND 是微软亚洲研究院基于 Microsoft News 平台匿名用户行为日志构建的新闻推荐数据集，包含新闻内容、用户历史点击行为以及曝光日志。本文使用的是 `MIND small` 版本。
+本项目基于**MIND** 数据集搭建，MIND 是微软亚洲研究院基于 Microsoft News 平台匿名用户行为日志构建的新闻推荐数据集，包含新闻内容、用户历史点击行为以及曝光日志。本文使用的是 `MIND larger` 版本，包含2M条交互数据，70W用户，10W条新闻
 
 ### news.csv 示例
 
@@ -35,7 +35,7 @@
 
 ## 环境要求
 
-在 ubnutu 25.10 python=3.10 5070ti 下可以正常运行 
+在 ubnutu 25.10 python=3.10下可以正常运行 
 
 ```bash
 pip install -r requirements.txt.txt
@@ -43,7 +43,7 @@ pip install -r requirements.txt.txt
 
 ## 数据准备
 
-### 1. 下载 MIND small 数据集
+### 1. 下载 MIND 数据集
 
 从 [MIND 官网](https://msnews.github.io/) 下载 zip 格式数据集：`MINDsmall_train.zip`或其他版本的文件（需修改config中对应的属性）
 
@@ -102,10 +102,20 @@ tensorboard --logdir .\ckpt
 
 ### 3. 训练模型
 
-运行 Transformer 召回模型：
+训练并验证T5模型：
 
 ```bash
 python rec/transformer/GR_T5.py
+```
+
+
+
+
+
+训练并验证Qwen模型：
+
+```python
+python rec/transformer/GR_Qwen.py
 ```
 
 该阶段根据用户历史点击序列训练生成式召回模型，并在验证集上评估召回效果。
@@ -119,9 +129,9 @@ SID构建
 
 
 
-T5模型在给定的参数下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`25mins`，通过调整参数可以在12GB显存下运行。跑完20个epochs大约6h
+T5模型在给定的参数(7M)下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`25mins`，通过调整参数可以在12GB显存下运行。跑完20个epochs大约6h
 
-
+Qwen模型在给定的参数(4M)下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`1h 25mins`，给定的参数需要24G显存才能做到推理
 
 ## 项目目录
 
@@ -179,17 +189,25 @@ T5模型在给定的参数下，train的一个epoch耗时`10mins`，evaluate的�
 
 
 
+使用`Mind-Large`数据集，`7M`的参数量下，T5模型的表现如下
+
+| 方法      | Hit@1    | Hit@10   | Hit@20   | NDCG@1   | NDCG@10  | NDCG@20  |
+| --------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| RQ-VAE    | 0.009258 | 0.045199 | 0.079288 | 0.009258 | 0.023902 | 0.032428 |
+| RQ-KMEANS | 0.005423 | 0.027995 | 0.063673 | 0.005423 | 0.014200 | 0.023053 |
+
+| 指标    | RQ-KMEANS - RQ-VAE | 相对变化 |
+| ------- | ------------------ | -------- |
+| Hit@1   | -0.003835          | -41.42%  |
+| Hit@10  | -0.017204          | -38.06%  |
+| Hit@20  | -0.015615          | -19.69%  |
+| NDCG@1  | -0.003835          | -41.42%  |
+| NDCG@10 | -0.009702          | -40.59%  |
+| NDCG@20 | -0.009375          | -28.91%  |
 
 
 
-
-
-
-
-
-
-
-
+由于时间和财力的限制，实验结果没有多次验证
 
 
 
@@ -201,4 +219,5 @@ T5模型在给定的参数下，train的一个epoch耗时`10mins`，evaluate的�
 + 尽管RQ-VAE的训练很抽象，但最终结果似乎还不错
 + RQ-KEAMNS的训练速度很快，而且效果更好
 + RQ-KEAMNS的冲突率更高
++ RQ-KEAMNS在数据量较小，模型参数较小的情况下效果更好，反之，更坏
 + 增大T5的参数能有效提升最终指标

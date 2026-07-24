@@ -5,95 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f55fe19-40a3-4548-9368-4449af0ab019" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/rec/semantic/data/rqave_dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/generate_code.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/kernels/quantize.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/model/RQ_VAE.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/model/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/model/components/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/model/components/layers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/model/components/rq.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/model/components/vq.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/model/kmeans.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/semantic/trainer/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/transformer/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/transformer/data/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/transformer/model/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/utils/.ipynb_checkpoints/qwen_processor-checkpoint.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/utils/.ipynb_checkpoints/tf_processor-checkpoint.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/utils/collision.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/utils/metrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/utils/rqave.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rec/utils/tf_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/news_rec.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/news_rec.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/model/.ipynb_checkpoints/generate_sid-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/model/.ipynb_checkpoints/qwen-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/semantic/data/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/model/.ipynb_checkpoints/tf-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/model/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/model/generate_sid.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/generate_sid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/model/qwen.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/qwen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/model/tf.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/tf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/process/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/semantic/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/process/generate_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/generate_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/qwen.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/qwen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocessData.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/data/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/data/rqave_dataset.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/generate_code.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/kernels/quantize.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/model/RQ_VAE.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/model/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/model/components/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/model/components/layers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/model/components/rq.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/model/components/vq.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/model/kmeans.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/trainer/.ipynb_checkpoints/sid_trainer-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/semantic/trainer/sid_trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/trainer/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/semantic/trainer/sid_trainer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/.ipynb_checkpoints/GR_Qwen-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/GR_Qwen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/.ipynb_checkpoints/main-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/GR_T5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/GR_Qwen.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/data/.ipynb_checkpoints/qwen_dataset-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/data/qwen_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/data/.ipynb_checkpoints/tf_dataset-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/data/tf_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/data/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/data/qwen_dataset.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/data/tf_dataset.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/model/.ipynb_checkpoints/Qwen-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/model/Qwen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/model/.ipynb_checkpoints/T5-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/model/T5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/model/Qwen.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/model/T5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/model/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/runs/20260611_154638_TIGER_lr0.0001_bs128_beam25_code4/best_model.pth" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/runs/20260611_154638_TIGER_lr0.0001_bs128_beam25_code4/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/runs/20260611_154638_TIGER_lr0.0001_bs128_beam25_code4/train.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/transformer/runs/tiger.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/utils/.ipynb_checkpoints/qwen_processor-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/utils/.ipynb_checkpoints/tf_processor-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/utils/collision.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/utils/metrics.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/utils/qwen_processor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/utils/rqave.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recall/utils/tf_processor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rec/transformer/GR_Qwen.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/GR_Qwen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rec/transformer/data/qwen_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/data/qwen_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rec/transformer/model/Qwen.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/model/Qwen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rec/utils/tf_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/utils/tf_processor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -103,6 +35,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="3GqjKKLAaKGJSYB8IBkFRjs5CCF" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -130,6 +65,7 @@
       <recent name="E:\news_rec\rec" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\news_rec\runs\20260724_021753_Qwen_RQ-VAE_lr0.0001_bs256_beam20_code4" />
       <recent name="E:\news_rec\config" />
     </key>
   </component>
@@ -151,7 +87,12 @@
       <workItem from="1784705932897" duration="3226000" />
       <workItem from="1784714782240" duration="1823000" />
       <workItem from="1784776750704" duration="1021000" />
-      <workItem from="1784791239410" duration="612000" />
+      <workItem from="1784791239410" duration="2133000" />
+      <workItem from="1784798084894" duration="2945000" />
+      <workItem from="1784802735412" duration="1000000" />
+      <workItem from="1784854673778" duration="3120000" />
+      <workItem from="1784875782589" duration="136000" />
+      <workItem from="1784880536216" duration="3321000" />
     </task>
     <servers />
   </component>
