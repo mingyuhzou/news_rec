@@ -7,13 +7,6 @@
     <list default="true" id="0f55fe19-40a3-4548-9368-4449af0ab019" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/qwen.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/qwen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessData.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rec/transformer/GR_Qwen.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/GR_Qwen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rec/transformer/data/qwen_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/data/qwen_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rec/transformer/model/Qwen.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/transformer/model/Qwen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rec/utils/tf_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/rec/utils/tf_processor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +42,7 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/news_rec/ckpt&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/news_rec/runs/20260724_092958_Qwen_DPO_RQ-VAE_lr1e-05_bs256_beam20_code4&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -61,6 +54,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\news_rec\runs\20260724_092958_Qwen_DPO_RQ-VAE_lr1e-05_bs256_beam20_code4" />
       <recent name="E:\news_rec\ckpt" />
       <recent name="E:\news_rec\rec" />
     </key>
@@ -92,7 +86,9 @@
       <workItem from="1784802735412" duration="1000000" />
       <workItem from="1784854673778" duration="3120000" />
       <workItem from="1784875782589" duration="136000" />
-      <workItem from="1784880536216" duration="3321000" />
+      <workItem from="1784880536216" duration="4080000" />
+      <workItem from="1784961999457" duration="3161000" />
+      <workItem from="1785051977821" duration="1304000" />
     </task>
     <servers />
   </component>

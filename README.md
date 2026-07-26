@@ -1,7 +1,7 @@
 #  News Recommendation System
 
 
-参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER) 实现生成式召回模型，对比使用RQ-VAE和[RQ-KMEANS](https://github.com/EdoardoBotta/rq-kmeans)方法构造sid
+参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER) 实现生成式推荐，对比使用RQ-VAE和[RQ-KMEANS](https://github.com/EdoardoBotta/rq-kmeans)方法构造sid，并使用DPO做强化学习
 
 该方法较适合 MIND 数据集，因为 MIND 缺少显式用户特征与物品特征，但提供了完整且丰富（mean len > 100）的用户历史点击序列。模型通过用户历史行为生成候选新闻的 Semantic ID，从而完成候选集召回。
 
@@ -120,6 +120,19 @@ python rec/transformer/GR_Qwen.py
 
 该阶段根据用户历史点击序列训练生成式召回模型，并在验证集上评估召回效果。
 
+
+
+### 4. 强化学习
+
+用训练好的权重做强化学习DPO，强化学习的目标是click>unclick
+
+```python
+python rec/transformer/DPO_Qwen.py \
+  --checkpoint runs/权重/best_model.pth
+```
+
+
+
 ## 训练耗时
 
 SID构建
@@ -129,46 +142,195 @@ SID构建
 
 
 
-T5模型在给定的参数(7M)下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`25mins`，通过调整参数可以在12GB显存下运行。跑完20个epochs大约6h
+- T5模型在给定的参数(7M)下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`25mins`，通过调整参数可以在12GB显存下运行；
 
-Qwen模型在给定的参数(4M)下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`1h 25mins`，给定的参数需要24G显存才能做到推理
+- Qwen模型在给定的参数(4M)下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`1h 25mins`，给定的参数需要24G显存才能做到推理；
+
+- DPO消耗30G的显存，一个epoch需要`1.5h`
+
+
+
 
 ## 项目目录
 
-```text
-.
-├── config/
-│   ├── model/
-│   │     └── nrms.py # 排序模型参数
-│   │     └── tf.py # 召回模型参数
-│   ├── process/
-│   │     └── generate_code.py # RQ-VAE &RQ-KMEANS 参数
-├── Data/
-│   ├── MINDsmall_train/  # 数据集
-│   └── all-MiniLM-L6-v2/ # 文本编码模型
-│
-├── notebooks/
-│   └── embedding.ipynb  # 处理数据集
-│
-├── recall/
-│   ├── rq-vae/  # 编码sid
-│   │      └── data  # dataset
-│   │      └── kernels # RQ-KMEANS 算子优化
-│   │      └── model   # RQ-VAE模型
-│   │      └── trainer # RQ-VAE训练类
-│   │      └── generate_code.py # 构造 itemid->sid，根据参数选择sid转换方法
-│   └── transformer/
-│   │      └── data  # dataset
-│   │      └── model   # RQ-VAE模型
-│   └──    └── main.py # 训练tiger模型并评估
-│
-├── README.md
-└── requirements.txt
+当前项目可以分为五个部分：数据预处理、Semantic ID、生成式召回、DPO强化、实验输出。
+
+```
+news_rec/
+├── config/                     # 所有配置
+├── rec/
+│   ├── semantic/               # 新闻 Semantic ID 构建
+│   ├── transformer/            # T5、Qwen、DPO训练与验证
+│   └── utils/                  # 数据处理与推荐指标
+├── utils/                      # 通用日志和实验目录工具
+├── tmp/                        # 数据、SID、embedding和中间权重
+├── runs/                       # 每次训练产生的实验目录
+├── assets/                     # README图片
+├── preprocessData.py           # MIND数据预处理入口
+├── requirements.txt            # Python依赖
+└── README.md
+```
+
+### 1. 配置目录
+
+[config](E:/news_rec/config) 保存不同阶段的参数。
+
+```
+config/
+├── common.py          # 数据路径、用户划分比例和随机种子
+├── generate_sid.py    # RQ-VAE/RQ-KMEANS参数
+├── generate_code.py   # SID生成模型和输出路径
+├── tf.py              # T5配置
+├── qwen.py            # GR_Qwen配置
+└── dpo_qwen.py        # Qwen DPO配置
+```
+
+### 2. 数据预处理
+
+[preprocessData.py](E:/news_rec/preprocessData.py) 负责：
+
+- 解压并读取 MIND 数据；
+- 解析用户 history；
+- 从 impressions 中提取 click 和 unclick；
+- 建立用户和新闻ID映射；
+- 按用户随机划分训练集与测试集；
+- 保存训练、测试 parquet；
+- 可选地生成新闻文本 embedding。
+
+输出结构：
+
+```
+tmp/
+├── train/
+│   └── train.parquet
+├── test/
+│   └── test.parquet
+├── embedding/
+│   └── item_emb_title.parquet
+├── item_dict.npy
+├── user_dict.npy
+├── rqvae.npy
+└── MINDlarge_train.zip
+```
+
+每条处理后的样本大致为：
+
+```
+{
+    "user_id": ...,
+    "history": [...],
+    "target": click[0],
+    "click": [...],
+    "unclick": [...]
+}
+```
+
+只重新生成训练和测试数据时：
+
+```
+python preprocessData.py --skip-embedding
+```
+
+### 3. Semantic ID模块
+
+[rec/semantic](E:/news_rec/rec/semantic) 将新闻 embedding 离散化为 Semantic ID。
+
+```
+rec/semantic/
+├── generate_code.py            # SID生成入口
+├── data/
+│   └── rqave_dataset.py        # embedding数据集
+├── model/
+│   ├── RQ_VAE.py               # RQ-VAE主模型
+│   ├── kmeans.py               # KMeans方案
+│   └── components/
+│       ├── layers.py
+│       ├── rq.py               # Residual Quantization
+│       └── vq.py               # Vector Quantization
+├── kernels/
+│   └── quantize.py             # 量化操作
+└── trainer/
+    └── sid_trainer.py           # SID模型训练器
+```
+
+最终输出：
+
+```
+tmp/rqvae.npy
+```
+
+其作用是建立：
+
+```
+item_id → [c1, c2, c3, c4]
+```
+
+后续 T5、Qwen 和 DPO 都使用同一套 SID。
+
+### 4. 生成式推荐模块
+
+[rec/transformer](E:/news_rec/rec/transformer) 是主要训练代码。
+
+```
+rec/transformer/
+├── GR_T5.py                     # T5召回训练与验证
+├── GR_Qwen.py                   # Qwen召回训练与验证
+├── DPO_Qwen.py                  # Qwen DPO训练和前后验证
+├── model/
+│   ├── T5.py                    # T5模型封装
+│   └── Qwen.py                  # Qwen2 Causal LM封装
+└── data/
+    ├── tf_dataset.py            # T5数据集
+    ├── qwen_dataset.py          # GR_Qwen数据集
+    └── qwen_dpo_dataset.py      # chosen/rejected偏好数据集
+```
+
+#### GR_Qwen
+
+[GR_Qwen.py](E:/news_rec/rec/transformer/GR_Qwen.py) 完成：
+
+```
+history SID
+    ↓
+Qwen Causal LM
+    ↓
+beam search生成候选SID
+    ↓
+Hit@1/10/20、NDCG@1/10/20
+```
+
+训练目标为：
+
+```
+history → target SID + EOS
+```
+
+#### DPO_Qwen
+
+[DPO_Qwen.py](E:/news_rec/rec/transformer/DPO_Qwen.py) 完成：
+
+```
+加载GR_Qwen checkpoint
+          ↓
+在测试集计算Before DPO
+          ↓
+复制并冻结reference model
+          ↓
+使用训练用户的click/unclick训练DPO
+          ↓
+在同一测试集计算After DPO
+```
+
+偏好样本由 [qwen_dpo_dataset.py](E:/news_rec/rec/transformer/data/qwen_dpo_dataset.py) 构造：
+
+```
+history + click SID   → chosen
+history + unclick SID → rejected
 ```
 
 ## 指标
 
-使用`Mind-small`数据集，`2M`的参数量下，T5模型的表现如下
+使用`Mind-small`数据集，`2M`的参数量下，`T5`模型的表现如下
 
 
 | 方法     | Hit@1    | Hit@10   | Hit@20   | NDCG@1   | NDCG@10  | NDCG@20  |
@@ -189,7 +351,7 @@ Qwen模型在给定的参数(4M)下，train的一个epoch耗时`10mins`，evalua
 
 
 
-使用`Mind-Large`数据集，`7M`的参数量下，T5模型的表现如下
+使用`Mind-Large`数据集，`7M`的参数量下，`T5`模型的表现如下
 
 | 方法      | Hit@1    | Hit@10   | Hit@20   | NDCG@1   | NDCG@10  | NDCG@20  |
 | --------- | -------- | -------- | -------- | -------- | -------- | -------- |
@@ -207,17 +369,44 @@ Qwen模型在给定的参数(4M)下，train的一个epoch耗时`10mins`，evalua
 
 
 
-由于时间和财力的限制，实验结果没有多次验证
+
+
+使用`Mind-Large`数据集，`4M`的参数量下，`Qwen`模型的表现如下
+
+| Hit@1   | Hit@10  | Hit@20 | NDCG@1 | NDCG@10 | NDCG@20 |
+| ------- | ------- | ------ | ------ | ------- | ------- |
+| 0.00214 | 0.08112 | 0.1253 | 0.0021 | 0.036   | 0.04747 |
+
+
+
+> 在DPO搭建中，修改了数据构造的模式，原先train是history去掉最后一位，然后截取最后一位作为target，test是完整的history去掉最后一位，然后截取最后一位作为target；这里改为了按照用户28分，去Impression中的click第一位作为target，也就是现在代码中的版本，主要的原因是调教ai时没注意，因此DPO中的指标与上面不同。
+
+
+
+使用`Qwen`模型在`Mind-Large`上做`DPO`强化学习后，效果有所提升，尤其是在`Hit@1`上。最初的实验中，epoch设置为3，学习率设置为0.0001，但最终效果除了@1都有所下降，因此需要控制DPO强度。
+
+| 指标    | DPO 前   | DPO 后   | 相对提升    |
+| ------- | -------- | -------- | ----------- |
+| Hit@1   | 0.002296 | 0.009470 | **+312.5%** |
+| Hit@10  | 0.036761 | 0.046774 | **+27.2%**  |
+| Hit@20  | 0.063206 | 0.078455 | **+24.1%**  |
+| NDCG@1  | 0.002296 | 0.009470 | **+312.5%** |
+| NDCG@10 | 0.016238 | 0.025015 | **+54.1%**  |
+| NDCG@20 | 0.022924 | 0.032928 | **+43.6%**  |
+
+> 由于时间和财力的限制，实验结果没有多次验证，对于修改后的数据格式也没有完整地再次跑一遍，有机会需要再次验证
+>
 
 
 
 ## 实验心得
 
 + RQ-VAE，量化损失会不断增大，不知道该如何平衡两种损失。不过也看到过别人有同样的情况，似乎是正常的![image-20260722160724872](./assets/image-20260722160724872.png)
-+ RQ-VAE，训练过程中冲突率会不断增大，不知道为什么![image-20260722160819770](./assets/image-20260722160819770.png)
++ RQ-VAE训练过程中冲突率会不断增大，不知道为什么![image-20260722160819770](./assets/image-20260722160819770.png)
 + 码本的维度和层数并不是越多越好
 + 尽管RQ-VAE的训练很抽象，但最终结果似乎还不错
 + RQ-KEAMNS的训练速度很快，而且效果更好
 + RQ-KEAMNS的冲突率更高
 + RQ-KEAMNS在数据量较小，模型参数较小的情况下效果更好，反之，更坏
 + 增大T5的参数能有效提升最终指标
++ Qwen模型的效果由于T5模型，但是消耗的显存更大
