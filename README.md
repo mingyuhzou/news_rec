@@ -1,10 +1,8 @@
 #  News Recommendation System
 
+基于 MIND 新闻数据集搭建端到端生成式新闻推荐系统，完成用户行为解析、新闻文本向量化、用户级数据划分及 Hit@K、NDCG@K 评估；分别采用 RQ-VAE 与 RQ-KMeans 将新闻向量离散化为多级 Semantic ID，使用Sinkborn算法缓解码本冲突，对比不同量化方法的 SID 碰撞率、编码效率和召回效果；基于 T5 Encoder-Decoder 与 Qwen2 Causal LM 实现生成式召回，形成“T5/Qwen × RQ-VAE/RQ-KMeans”对比实验矩阵；基于曝光日志构造265万组 click/unclick 偏好样本并实现 DPO 优化，在原始召回模型的基础上，Hit@10、Hit@20、NDCG@20 均有所提升。
 
-参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER) 实现生成式推荐，对比使用RQ-VAE和[RQ-KMEANS](https://github.com/EdoardoBotta/rq-kmeans)方法构造sid，并使用DPO做强化学习
-
-该方法较适合 MIND 数据集，因为 MIND 缺少显式用户特征与物品特征，但提供了完整且丰富（mean len > 100）的用户历史点击序列。模型通过用户历史行为生成候选新闻的 Semantic ID，从而完成候选集召回。
-
+部分代码参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER) ，[RQ-KMEANS](https://github.com/EdoardoBotta/rq-kmeans)
 
 ## 数据集
 
@@ -138,9 +136,9 @@ python rec/transformer/DPO_Qwen.py \
 SID构建
 
 + RQ-VAE 耗时`12mins`
-+ RQ-KMEANS  设置早停后比RQ-VAE快，大约`3~5mins`
++ RQ-KMEANS  设置早停（聚类中心的移动量小于阈值）后比RQ-VAE快，大约`3~5mins`
 
-
+模型训练和验证
 
 - T5模型在给定的参数(7M)下，train的一个epoch耗时`10mins`，evaluate的一个epoch耗时`25mins`，通过调整参数可以在12GB显存下运行；
 
@@ -379,7 +377,7 @@ history + unclick SID → rejected
 
 
 
-> 在DPO搭建中，修改了数据构造的模式，原先train是history去掉最后一位，然后截取最后一位作为target，test是完整的history去掉最后一位，然后截取最后一位作为target；这里改为了按照用户28分，去Impression中的click第一位作为target，也就是现在代码中的版本，主要的原因是调教ai时没注意，因此DPO中的指标与上面不同。
+> 在DPO搭建中，修改了数据构造的模式，原先train是history去掉最后一位，然后截取最后一位作为target，test是完整的history去掉最后一位，然后截取最后一位作为target；这里改为了按照用户28分，取Impression中的click第一位作为target，也就是现在代码中的版本，主要的原因是调教ai时没注意，因此DPO中的指标与上面不同。
 
 
 
@@ -409,4 +407,5 @@ history + unclick SID → rejected
 + RQ-KEAMNS的冲突率更高
 + RQ-KEAMNS在数据量较小，模型参数较小的情况下效果更好，反之，更坏
 + 增大T5的参数能有效提升最终指标
-+ Qwen模型的效果由于T5模型，但是消耗的显存更大
++ Qwen模型的效果优于T5模型，但是消耗的显存更大
++ DPO需要控制强度，否则可能损害模型效果
