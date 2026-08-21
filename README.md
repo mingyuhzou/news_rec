@@ -1,6 +1,6 @@
 #  News Recommendation System
 
-基于 MIND 新闻数据集搭建端到端生成式新闻推荐系统，完成用户行为解析、新闻文本向量化、用户级数据划分及 Hit@K、NDCG@K 评估；分别采用 RQ-VAE 与 RQ-KMeans 将新闻向量离散化为多级 Semantic ID，使用Sinkborn算法缓解码本冲突，对比不同量化方法的 SID 碰撞率、编码效率和召回效果；基于 T5 Encoder-Decoder 与 Qwen2 Causal LM 实现生成式召回，形成“T5/Qwen × RQ-VAE/RQ-KMeans”对比实验矩阵；基于曝光日志构造265万组 click/unclick 偏好样本并实现 DPO 优化，在原始召回模型的基础上，Hit@10、Hit@20、NDCG@20 均有所提升。
+基于 MIND 新闻数据集搭建端到端生成式新闻推荐系统，完成用户行为解析、新闻文本向量化、用户级数据划分及 Hit@K、NDCG@K 评估；分别采用 RQ-VAE 与 RQ-KMeans 将新闻向量离散化为多级 Semantic ID，使用Sinkhorn算法缓解码本冲突，对比不同量化方法的 SID 碰撞率、编码效率和召回效果；基于 T5 Encoder-Decoder 与 Qwen2 Causal LM 实现生成式召回，形成“T5/Qwen × RQ-VAE/RQ-KMeans”对比实验矩阵；基于曝光日志构造265万组 click/unclick 偏好样本并实现 DPO 优化，在原始召回模型的基础上，Hit@10、Hit@20、NDCG@20 均有所提升。
 
 部分代码参考 [TIGER](https://github.com/XiaoLongtaoo/TIGER) ，[RQ-KMEANS](https://github.com/EdoardoBotta/rq-kmeans)
 
